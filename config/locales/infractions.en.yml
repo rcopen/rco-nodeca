@@ -1,0 +1,20 @@
+i18n:
+  en-US:
+    users:
+      infractions:
+        types:
+          ~override: true
+          overquoting: Quotes used too often
+          offtopic: Offtopic
+          bad_title: Bad title
+          personal_conversation: Personal conversation
+          bad_section: Section not match topic
+          frequent_up: Rise topic more than once a week
+          spam: Topic looks like a spam
+          no_price: No price
+          duplicate_topic: Duplicate topic
+          pirate_software: Pirate software
+          bad_profile_image: Photo in profile is not match requirements
+          bad_city: Bad city value
+          bad_profile_data: Bad profile data
+          multiple_accounts: Multiple accounts
