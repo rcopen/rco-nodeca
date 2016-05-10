@@ -19,11 +19,11 @@ users:
         points: 3
         expire_days: 30
         priority: 40
-      bad_section:
+      wrong_section:
         points: 3
         expire_days: 30
         priority: 50
-      frequent_up:
+      frequent_bump:
         points: 4
         expire_days: 30
         priority: 60
@@ -39,7 +39,7 @@ users:
         points: 4
         expire_days: 30
         priority: 100
-      pirate_software:
+      warez:
         points: 30
         expire_days: 30
         priority: 100

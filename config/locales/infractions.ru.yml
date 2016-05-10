@@ -1,0 +1,20 @@
+i18n:
+  ru-RU:
+    users:
+      infractions:
+        types:
+          ~override: true
+          overquoting: Черезмерное цитирование (оверквотинг)
+          offtopic: Сообщение не по теме
+          bad_title: Кривой заголовок
+          personal_conversation: Личная переписка
+          wrong_section: Тема не соответствует разделу
+          frequent_bump: Поднятие темы чаще недели
+          spam: Спамерское оформление
+          no_price: Нет цены
+          duplicate_topic: Дублирование тем
+          warez: Пиратский софт
+          bad_profile_image: Фото в профиле не соответствует требованиям
+          bad_city: Артефакты в поле "Город"
+          bad_profile_data: Некорректные регистрационные данные
+          multiple_accounts: Повторная регистрация

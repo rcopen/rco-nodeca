@@ -8,13 +8,13 @@ i18n:
           offtopic: Offtopic
           bad_title: Bad title
           personal_conversation: Personal conversation
-          bad_section: Section not match topic
-          frequent_up: Rise topic more than once a week
+          wrong_section: Topic is posted in the wrong section
+          frequent_bump: Bumping topic more than once a week
           spam: Topic looks like a spam
-          no_price: No price
+          no_price: No price listed
           duplicate_topic: Duplicate topic
-          pirate_software: Pirate software
-          bad_profile_image: Photo in profile is not match requirements
-          bad_city: Bad city value
-          bad_profile_data: Bad profile data
+          warez: Pirated software
+          bad_profile_image: Photo in the profile doesn't match requirements
+          bad_city: Bad city in the profile
+          bad_profile_data: Bad information in the profile
           multiple_accounts: Multiple accounts
