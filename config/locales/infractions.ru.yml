@@ -2,8 +2,12 @@ i18n:
   ru-RU:
     users:
       infractions:
+        ~override: true
+
+        category_names:
+          profile: Профиль
+
         types:
-          ~override: true
           overquoting: Черезмерное цитирование (оверквотинг)
           offtopic: Сообщение не по теме
           bad_title: Кривой заголовок
@@ -20,7 +24,6 @@ i18n:
           multiple_accounts: Повторная регистрация
 
         types_description:
-          ~override: true
           overquoting: |
             Обычно это предупреждение выдается:
 

@@ -2,8 +2,12 @@ i18n:
   en-US:
     users:
       infractions:
+        ~override: true
+
+        category_names:
+          profile: Profile
+
         types:
-          ~override: true
           overquoting: Quotes used too often
           offtopic: Offtopic
           bad_title: Bad title
@@ -21,7 +25,6 @@ i18n:
 
         # TODO: translate to english
         types_description:
-          ~override: true
           overquoting: |
             Обычно это предупреждение выдается:
 

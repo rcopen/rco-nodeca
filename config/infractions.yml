@@ -1,8 +1,8 @@
 users:
   infractions:
-    types:
-      ~override: true
+    ~override: true
 
+    types:
       overquoting:
         points: 1
         expire_days: 30
