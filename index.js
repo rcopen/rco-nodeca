@@ -1,7 +1,5 @@
-// Stub. Nothing to init in this module.
-//
 'use strict';
 
 exports.root = __dirname;
-exports.name = 'rcd-nodeca';
-exports.init = function () {};
+exports.name = 'nodeca.site';
+exports.init = function (N) { require('./lib/autoload.js')(N); };

@@ -1,0 +1,11 @@
+bundles:
+  frontend:
+    - rcd-nodeca
+
+
+packages:
+  common:
+    entries:
+      - client/common
+
+  rcd-nodeca: {}

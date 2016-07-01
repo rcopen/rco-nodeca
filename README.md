@@ -1,6 +1,8 @@
 rcd-nodeca
 ==========
 
+[![Build Status](https://travis-ci.org/nodeca/nodeca.site.svg?branch=master)](https://travis-ci.org/nodeca/nodeca.site)
+
 RC Design forum configuration for [nodeca](https://github.com/nodeca/nodeca).
 
 Installation
