@@ -55,7 +55,7 @@ users:
         priority: 1020
         category_key: profile
       bad_profile_data:
-        points: 6
+        points: 0
         expire_days: 30
         priority: 1030
         category_key: profile

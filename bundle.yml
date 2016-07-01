@@ -8,4 +8,8 @@ packages:
     entries:
       - client/common
 
+  users:
+    entries:
+      - internal/users
+
   rcd-nodeca: {}
