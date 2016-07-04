@@ -13,4 +13,4 @@ cd nodeca
 npm i git+https://github.com/rcdesign/rcd-nodeca.git
 ```
 
-Add `rcd-nodeca` to enabled applications in config.
+Add `rcd-nodeca` to applications list in config.
