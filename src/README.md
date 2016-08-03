@@ -22,7 +22,8 @@ Favicon for Android Chrome
    - [x] Add a solid, plain background to fill the transparent regions.
    - App name: RC Open
  - Options
-   - [x] Browser. In this mode, when the user clicks the link, Android Chrome behaves as if the page was opened like any regular web site. 
+   - [x] Browser. In this mode, when the user clicks the link, Android
+     Chrome behaves as if the page was opened like any regular web site.
 
 Windows Metro
  - Use this color: #da532c
