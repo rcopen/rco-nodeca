@@ -1,8 +1,14 @@
 {
-  "name"            : "rcd-nodeca",
-  "description"     : "RC Design forum configuration for nodeca",
-  "version"         : "0.0.1",
-  "keywords"        : [ "nodeca" ],
-  "license"         : "MIT",
-  "repository"      : "rcdesign/rcd-nodeca"
+  "name": "rcd-nodeca",
+  "description": "RC Design forum configuration for nodeca",
+  "version": "0.0.1",
+  "keywords": [
+    "nodeca"
+  ],
+  "license": "MIT",
+  "repository": "rcdesign/rcd-nodeca",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-real-favicon": "^0.2.1"
+  }
 }
