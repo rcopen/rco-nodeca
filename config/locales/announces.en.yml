@@ -1,0 +1,22 @@
+i18n:
+  en-US:
+    common:
+      announces:
+        just_registered: |
+          The ability to post new messages will be unlocked a day after
+          registration. Although, if you did read the rules carefully, you
+          should know it already :)
+        bad_profile_info: |
+          md:
+            You have filled out profile info incorrectly. We assume that it's
+            an accident, not a intentional violation of the rules you agreed to
+            during registration.
+
+            In order to fix that, please fill out a special form on the
+            [contacts](/contacts/) page.
+
+            Just a reminder, a correct name, location and birth date is a
+            mandatory condition for communication on this website.
+        banned: |
+          This account is closed. Apparently, you as a site user caused us too
+          much trouble.

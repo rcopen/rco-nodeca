@@ -1,0 +1,8 @@
+announces:
+  just_registered:
+    usergroup: just_registered
+    dismiss_days: 30 # closed announce reappears in 30 days
+  bad_profile_info:
+    usergroup: che
+  banned:
+    usergroup: banned
