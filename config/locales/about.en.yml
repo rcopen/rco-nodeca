@@ -1,0 +1,9 @@
+i18n:
+  en-US:
+    users:
+      about:
+        skype: Skype
+        whatsapp: WhatsApp
+        telegram: Telegram
+        jabber: Jabber
+        icq: ICQ

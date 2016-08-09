@@ -1,0 +1,17 @@
+users:
+  about:
+    skype:
+      priority: 110
+      index: sparse
+    whatsapp:
+      priority: 120
+      index: sparse
+    telegram:
+      priority: 130
+      index: sparse
+    jabber:
+      priority: 140
+      index: sparse
+    icq:
+      priority: 150
+      index: sparse
