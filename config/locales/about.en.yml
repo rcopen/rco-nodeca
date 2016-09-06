@@ -7,3 +7,12 @@ i18n:
         telegram: Telegram
         jabber: Jabber
         icq: ICQ
+
+    admin:
+      users:
+        about:
+          skype: Skype
+          whatsapp: WhatsApp
+          telegram: Telegram
+          jabber: Jabber
+          icq: ICQ
