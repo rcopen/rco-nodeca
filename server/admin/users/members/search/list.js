@@ -6,8 +6,8 @@ const _ = require('lodash');
 
 const validate = require('is-my-json-valid')({
   properties: {
-    firstname: { type: 'string' },
-    lastname:  { type: 'string' }
+    first_name: { type: 'string' },
+    last_name:  { type: 'string' }
   },
   additionalProperties: true
 });

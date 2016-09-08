@@ -16,3 +16,5 @@ i18n:
           telegram: Telegram
           jabber: Jabber
           icq: ICQ
+          first_name: First name
+          last_name: Last name
