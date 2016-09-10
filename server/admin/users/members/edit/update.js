@@ -1,7 +1,6 @@
 
 'use strict';
 
-const _ = require('lodash');
 
 const validate = require('is-my-json-valid')({
   properties: {
