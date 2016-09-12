@@ -2,15 +2,6 @@
 'use strict';
 
 
-/*const validate = require('is-my-json-valid')({
-  properties: {
-    firstname: { type: 'string' },
-    lastname:  { type: 'string' }
-  },
-  additionalProperties: true
-});*/
-
-
 module.exports = function (N, apiPath) {
 
   // Add first_name/last_name to search form
