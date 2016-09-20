@@ -22,5 +22,8 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "google-libphonenumber": "^2.0.0"
   }
 }
