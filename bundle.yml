@@ -16,5 +16,6 @@ packages:
     entries:
       - client/users
       - internal/users
+      - server/users
 
   rcd-nodeca: {}
