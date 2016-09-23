@@ -11,6 +11,18 @@ const validate = require('is-my-json-valid')({
 });
 
 
+// Check first and lastnames, if returns true - check failed
+function check_name(string) {
+  return (string.length < 3 && !/^(ян|ли|ан|ус)$/i.test(string)) ||
+         // Check ".", ",", "*" and digits
+         /[\*\d\.,]/.test(string) ||
+         // Check for two "-" in a row
+         /--/.test(string) ||
+         // Check for 3 identical symbols in a row
+         /(.)\1{2}/.test(string);
+}
+
+
 module.exports = function (N, apiPath) {
 
   N.wire.before(apiPath, { priority: -20 }, function update_user(env) {
@@ -47,6 +59,45 @@ module.exports = function (N, apiPath) {
       if (env.data.user.about.birthday.toISOString().slice(0, 10) !== env.params.birthday) {
         env.data.errors.birthday = true;
       }
+    }
+  });
+
+
+  // Move users whose names don't fit our predefined patterns to
+  // a separate group.
+  //
+  N.wire.before(apiPath, function* cheburate(env) {
+    let first_name = env.data.user.first_name;
+    let last_name  = env.data.user.last_name;
+    let birthday   = env.data.user.about.birthday;
+    let valid      = true;
+
+    if (first_name || last_name) {
+      // Check if first and last names are the same
+      if (first_name === last_name) valid = false;
+
+      // Check firstname
+      if (check_name(first_name)) valid = false;
+
+      // Check lastname
+      // Like first name, but no spaces allowed
+      if (check_name(last_name) || / /.test(last_name)) valid = false;
+    }
+
+    if (birthday) {
+      let now = new Date();
+      let age = now.getFullYear() - birthday.getFullYear();
+
+      if (now.getMonth() < birthday.getMonth()) age--;
+      if (now.getMonth() === birthday.getMonth() && now.getDate() < birthday.getDate()) age--;
+
+      if (age < 8 || age > 80) valid = false;
+    }
+
+    if (!valid) {
+      let group_id = yield N.models.users.UserGroup.findIdByName('che');
+
+      env.data.user.usergroups = [ group_id ];
     }
   });
 
