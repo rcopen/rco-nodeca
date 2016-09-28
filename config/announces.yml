@@ -1,4 +1,6 @@
 announces:
+  incomplete_profile:
+    usergroup: incomplete_profile
   just_registered:
     usergroup: just_registered
     hide_days: 30 # closed announce reappears in 30 days

@@ -2,6 +2,11 @@ i18n:
   en-US:
     common:
       announces:
+        incomplete_profile: |
+          md:
+            This forum does not allow to post anonymously. To unlock the ability to
+            post new messages, please [fill in](/settings/about) your full name
+            and age in your profile.
         just_registered: |
           The ability to post new messages will be unlocked a day after
           registration. Although, if you did read the rules carefully, you
