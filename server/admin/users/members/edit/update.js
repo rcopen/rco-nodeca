@@ -23,6 +23,15 @@ module.exports = function (N, apiPath) {
     if (env.data.user.last_name !== env.params.last_name) {
       env.data.user.last_name = env.params.last_name;
     }
+
+    // If name or birthday are set to '', reset `incomplete_profile` flag
+    //
+    let complete = true;
+
+    if (!env.params.birthday) complete = false;
+    if (!env.params.first_name && !env.params.last_name) complete = false;
+
+    env.data.user.incomplete_profile = !complete;
   });
 
 };

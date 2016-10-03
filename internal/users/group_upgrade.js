@@ -105,6 +105,38 @@ module.exports = function (N, apiPath) {
   });
 
 
+  // `incomplete_profile` -> `just_registered` (fill profile)
+  //
+  // This rule applies if user already submitted a valid profile a while ago,
+  // and `incomplete_profile` is group was added since as an intermediate group,
+  // e.g. during unfreezing.
+  //
+  N.wire.on(apiPath, function* upgrade_incomplete_profile(locals) {
+    let grp_incomplete_profile = yield N.models.users.UserGroup.findIdByName('incomplete_profile');
+
+    let query = N.models.users.User.find()
+                    .where('usergroups').equals(grp_incomplete_profile)
+                    .where('incomplete_profile').equals(false);
+
+    if (locals.user_id) query = query.where('_id').equals(locals.user_id);
+
+    let users = yield query.lean(true);
+
+    for (let user of users) {
+      let just_registered = yield N.models.users.UserGroup.findIdByName('just_registered');
+
+      // remove old group, and make sure new group isn't already present
+      let usergroups = user.usergroups.filter(group =>
+                         [ String(grp_incomplete_profile), String(just_registered) ].includes(group));
+
+      usergroups.push(just_registered);
+
+      yield N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
+      locals.upgraded[user._id] = true;
+    }
+  });
+
+
   // Check first and lastnames, if returns true - check failed
   function check_name(string) {
     return (string.length < 3 && !/^(ян|ли|ан|ус)$/i.test(string)) ||
@@ -119,14 +151,24 @@ module.exports = function (N, apiPath) {
 
   // `incomplete_profile` -> `just_registered` (fill profile)
   // `incomplete_profile` -> `che` (fill profile)
-  N.wire.on(apiPath, function* upgrade_incomplete_profile(locals) {
+  //
+  // This rule applies if user have just submitted a profile change,
+  // so we need to verify if data is valid.
+  //
+  N.wire.on(apiPath, function* validate_profile(locals) {
+    // Only apply this rule when we're triggering update for a single user,
+    // not for a mass-upgrade triggered by cron task.
+    //
+    if (!locals.user_id) return;
+
     let grp_incomplete_profile = yield N.models.users.UserGroup.findIdByName('incomplete_profile');
 
     let query = N.models.users.User.find()
                     .where('usergroups').equals(grp_incomplete_profile)
                     .where('first_name').exists()
                     .where('last_name').exists()
-                    .where('about.birthday').exists();
+                    .where('about.birthday').exists()
+                    .where('incomplete_profile').equals(true);
 
     if (locals.user_id) query = query.where('_id').equals(locals.user_id);
 
@@ -138,27 +180,26 @@ module.exports = function (N, apiPath) {
       let birthday   = user.about ? user.about.birthday : null;
       let valid      = true;
 
-      if (first_name || last_name) {
-        // Check if first and last names are the same
-        if (first_name === last_name) valid = false;
+      if (!first_name || !last_name || !birthday) return;
 
-        // Check firstname
-        if (check_name(first_name)) valid = false;
+      // Check if first and last names are the same
+      if (first_name === last_name) valid = false;
 
-        // Check lastname
-        // Like first name, but no spaces allowed
-        if (check_name(last_name) || /\s/.test(last_name)) valid = false;
-      }
+      // Check firstname
+      if (check_name(first_name)) valid = false;
 
-      if (birthday) {
-        let now = new Date();
-        let age = now.getFullYear() - birthday.getFullYear();
+      // Check lastname
+      // Like first name, but no spaces allowed
+      if (check_name(last_name) || /\s/.test(last_name)) valid = false;
 
-        if (now.getMonth() < birthday.getMonth()) age--;
-        if (now.getMonth() === birthday.getMonth() && now.getDate() < birthday.getDate()) age--;
+      // Check birthday
+      let now = new Date();
+      let age = now.getFullYear() - birthday.getFullYear();
 
-        if (age < 8 || age > 80) valid = false;
-      }
+      if (now.getMonth() < birthday.getMonth()) age--;
+      if (now.getMonth() === birthday.getMonth() && now.getDate() < birthday.getDate()) age--;
+
+      if (age < 8 || age > 80) valid = false;
 
       let usergroups = user.usergroups;
       let new_group;
@@ -175,7 +216,11 @@ module.exports = function (N, apiPath) {
 
       usergroups.push(new_group);
 
-      yield N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
+      let update = { $set: { usergroups } };
+
+      if (valid) update.$set.incomplete_profile = false;
+
+      yield N.models.users.User.update({ _id: user._id }, update);
       locals.upgraded[user._id] = true;
     }
   });
