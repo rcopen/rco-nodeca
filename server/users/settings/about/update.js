@@ -48,6 +48,22 @@ module.exports = function (N, apiPath) {
         env.data.errors.birthday = true;
       }
     }
+
+    // check that age is between 8 and 90 (this is more strong restriction
+    // in addition to checks in nodeca.users)
+    if (env.params.birthday) {
+      let birthday = new Date(env.params.birthday);
+
+      if (!isNaN(birthday)) {
+        let now = new Date();
+        let age = now.getFullYear() - birthday.getFullYear();
+
+        if (now.getMonth() < birthday.getMonth()) age--;
+        if (now.getMonth() === birthday.getMonth() && now.getDate() < birthday.getDate()) age--;
+
+        if (age < 8 || age > 90) env.data.errors.birthday = true;
+      }
+    }
   });
 
 

@@ -20,11 +20,11 @@ module.exports = function (N, apiPath) {
     let search_query = env.data.search_query = env.data.search_query || {};
 
     if (env.params.first_name) {
-      search_query.first_name = new RegExp('^' + _.escapeRegExp(env.params.first_name), 'i');
+      search_query.first_name_lc = new RegExp('^' + _.escapeRegExp(env.params.first_name.toLowerCase()));
     }
 
     if (env.params.last_name) {
-      search_query.last_name = new RegExp('^' + _.escapeRegExp(env.params.last_name), 'i');
+      search_query.last_name_lc = new RegExp('^' + _.escapeRegExp(env.params.last_name.toLowerCase()));
     }
   });
 };

@@ -67,7 +67,7 @@ module.exports = function (N, apiPath) {
 
       // remove old group, and make sure new group isn't already present
       usergroups = user.usergroups.filter(group =>
-                     [ String(grp_novices), String(grp_members) ].includes(group));
+                     ![ String(grp_novices), String(grp_members) ].includes(String(group)));
 
       usergroups.push(grp_members);
 
@@ -95,7 +95,7 @@ module.exports = function (N, apiPath) {
 
       // remove old group, and make sure new group isn't already present
       usergroups = user.usergroups.filter(group =>
-                     [ String(grp_just_registered), String(grp_novices) ].includes(group));
+                     ![ String(grp_just_registered), String(grp_novices) ].includes(String(group)));
 
       usergroups.push(grp_novices);
 
@@ -127,7 +127,7 @@ module.exports = function (N, apiPath) {
 
       // remove old group, and make sure new group isn't already present
       let usergroups = user.usergroups.filter(group =>
-                         [ String(grp_incomplete_profile), String(just_registered) ].includes(group));
+                         ![ String(grp_incomplete_profile), String(just_registered) ].includes(String(group)));
 
       usergroups.push(just_registered);
 
@@ -192,15 +192,6 @@ module.exports = function (N, apiPath) {
       // Like first name, but no spaces allowed
       if (check_name(last_name) || /\s/.test(last_name)) valid = false;
 
-      // Check birthday
-      let now = new Date();
-      let age = now.getFullYear() - birthday.getFullYear();
-
-      if (now.getMonth() < birthday.getMonth()) age--;
-      if (now.getMonth() === birthday.getMonth() && now.getDate() < birthday.getDate()) age--;
-
-      if (age < 8 || age > 80) valid = false;
-
       let usergroups = user.usergroups;
       let new_group;
 
@@ -212,7 +203,7 @@ module.exports = function (N, apiPath) {
 
       // remove old group, and make sure new group isn't already present
       usergroups = user.usergroups.filter(group =>
-                     [ String(grp_incomplete_profile), String(new_group) ].includes(group));
+                     ![ String(grp_incomplete_profile), String(new_group) ].includes(String(group)));
 
       usergroups.push(new_group);
 
