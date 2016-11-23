@@ -4,8 +4,8 @@
 
 const validate = require('is-my-json-valid')({
   properties: {
-    first_name: { type: [ 'string', 'null' ], required: true },
-    last_name:  { type: [ 'string', 'null' ], required: true }
+    first_name: { type: [ 'string', 'null' ] },
+    last_name:  { type: [ 'string', 'null' ] }
   },
   additionalProperties: true
 });
@@ -20,38 +20,34 @@ module.exports = function (N, apiPath) {
     env.data.errors     = env.data.errors || {};
     env.res.fields      = env.res.fields  || {};
 
-    if (env.data.user.first_name || env.data.user.last_name) {
+    if (!env.data.user.first_name && !env.data.user.last_name) {
       // if name is already set, can't change it
-      if (env.data.user.first_name !== env.params.first_name ||
-          env.data.user.last_name  !== env.params.last_name) {
 
-        env.data.errors.first_name = true;
-        env.data.errors.last_name  = true;
-      }
-    } else if (env.params.first_name || env.params.last_name) {
-      // if user is trying to set a name, make sure both parts are non-empty
-      if (!env.params.first_name) env.data.errors.first_name = true;
-      if (!env.params.last_name)  env.data.errors.last_name  = true;
+      if (env.params.first_name || env.params.last_name) {
+        // if user is trying to set a name, make sure both parts are non-empty
+        if (!env.params.first_name) env.data.errors.first_name = true;
+        if (!env.params.last_name)  env.data.errors.last_name  = true;
 
-      if (env.data.user.first_name !== env.params.first_name) {
-        env.data.user.first_name = env.params.first_name;
-      }
+        if (env.data.user.first_name !== env.params.first_name) {
+          env.data.user.first_name = env.params.first_name;
+        }
 
-      if (env.data.user.last_name !== env.params.last_name) {
-        env.data.user.last_name  = env.params.last_name;
+        if (env.data.user.last_name !== env.params.last_name) {
+          env.data.user.last_name  = env.params.last_name;
+        }
       }
     }
 
     // make sure birthday cannot be changed once set
     if (env.data.user.about.birthday) {
-      if (env.data.user.about.birthday.toISOString().slice(0, 10) !== env.params.birthday) {
-        env.data.errors.birthday = true;
+      if (typeof env.params.birthday !== 'undefined') {
+        env.params.birthday = env.data.user.about.birthday.toISOString().slice(0, 10);
       }
     }
 
     // check that age is between 8 and 90 (this is more strong restriction
     // in addition to checks in nodeca.users)
-    if (env.params.birthday) {
+    if (!env.data.user.about.birthday && env.params.birthday) {
       let birthday = new Date(env.params.birthday);
 
       if (!isNaN(birthday)) {

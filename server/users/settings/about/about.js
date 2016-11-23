@@ -6,27 +6,38 @@ module.exports = function (N, apiPath) {
 
   N.wire.after(apiPath, { priority: 5 }, function add_fields(env) {
 
-    let is_name_set = !!(env.data.user.first_name || env.data.user.last_name);
+    if (!env.data.user.first_name && !env.data.user.last_name) {
+      env.res.about.push({
+        name:      'first_name',
+        value:     env.data.user.first_name,
+        mandatory: true,
+        priority:  4
+      });
 
-    env.res.about.push({
-      name:     'first_name',
-      value:    env.data.user.first_name,
-      readonly: is_name_set,
-      priority: 4
-    });
+      env.res.about.push({
+        name:      'last_name',
+        value:     env.data.user.last_name,
+        mandatory: true,
+        priority:  5
+      });
+    }
 
-    env.res.about.push({
-      name:     'last_name',
-      value:    env.data.user.last_name,
-      readonly: is_name_set,
-      priority: 5
-    });
-
-    // make birthday read-only if set
-    env.res.about.forEach(field => {
+    env.res.about = env.res.about.filter(field => {
       if (field.name === 'birthday') {
-        field.readonly = !!field.value;
+        // hide birthday field if set
+        if (field.value) return false;
+
+        field.mandatory = true;
+
+        return true;
+      } else if (field.name === 'location') {
+
+        field.mandatory = true;
+
+        return true;
       }
+
+      return true;
     });
   });
 };
