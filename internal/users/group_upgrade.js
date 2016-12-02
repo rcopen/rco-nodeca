@@ -19,8 +19,8 @@
 //
 //  2. `incomplete_profile` -> `just_registered` (fill profile)
 //
-//     If user has "about me" data filled (first name, last name
-//     and birthday), they are moved to `just_registered`
+//     If user has "about me" data filled (first name, last name,
+//     birthday and location), they are moved to `just_registered`
 //
 //  3. `incomplete_profile` -> `che` (fill profile)
 //
@@ -167,6 +167,7 @@ module.exports = function (N, apiPath) {
                     .where('usergroups').equals(grp_incomplete_profile)
                     .where('first_name').exists()
                     .where('last_name').exists()
+                    .where('location').exists()
                     .where('about.birthday').exists()
                     .where('incomplete_profile').equals(true);
 
@@ -178,9 +179,10 @@ module.exports = function (N, apiPath) {
       let first_name = user.first_name;
       let last_name  = user.last_name;
       let birthday   = user.about ? user.about.birthday : null;
+      let location   = user.location;
       let valid      = true;
 
-      if (!first_name || !last_name || !birthday) return;
+      if (!first_name || !last_name || !birthday || !location) return;
 
       // Check if first and last names are the same
       if (first_name === last_name) valid = false;
