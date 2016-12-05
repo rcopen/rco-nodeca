@@ -9,5 +9,6 @@ module.exports = function (N, apiPath) {
 
   N.wire.on(apiPath, function rules(env) {
     env.res.head.title = env.t('title');
+    env.res.rules_content = env.t('text');
   });
 };
