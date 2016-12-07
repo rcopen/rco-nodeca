@@ -1,0 +1,8 @@
+menus:
+  common:
+    footer:
+      rules:
+        to: common.rules
+
+      contacts:
+        to: ~
