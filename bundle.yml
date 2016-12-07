@@ -11,6 +11,7 @@ packages:
   common:
     entries:
       - client/common
+      - server/common
 
   users:
     entries:
