@@ -13,6 +13,10 @@ packages:
       - client/common
       - server/common
 
+  forum:
+    entries:
+      - client/forum
+
   users:
     entries:
       - client/users
