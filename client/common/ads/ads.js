@@ -6,6 +6,22 @@ const SCRIPT_LOADING    = 1;
 const SCRIPT_LOADED     = 2;
 
 let ya_script_status = SCRIPT_NOT_LOADED;
+let scrolling = false;
+let after_scroll = [];
+
+
+function remove_block($tag) {
+  let scroll_top = $(window).scrollTop();
+  let tag_height = $tag.height();
+  let window_center = scroll_top + $(window).height() / 2;
+  let tag_bottom = $tag.offset().top + tag_height;
+
+  $tag.remove();
+
+  if (window_center > tag_bottom) {
+    $(window).scrollTop(scroll_top - tag_height);
+  }
+}
 
 
 function render_rtb($tag) {
@@ -22,16 +38,8 @@ function render_rtb($tag) {
       async: true
     }, function () {
       // failure to load ads, remove block
-      let scroll_top = $(window).scrollTop();
-      let tag_height = $tag.height();
-      let window_center = scroll_top + $(window).height() / 2;
-      let tag_bottom = $tag.offset().top + tag_height;
-
-      $tag.remove();
-
-      if (window_center > tag_bottom) {
-        $(window).scrollTop(scroll_top - tag_height);
-      }
+      if (scrolling) after_scroll.push(() => remove_block($tag));
+      else remove_block($tag);
     });
   };
 }
@@ -61,12 +69,27 @@ function append_ads(selector) {
         break;
 
       case SCRIPT_LOADED:
-        // delay loading until it is inserted to the DOM
-        setTimeout(fn, 1);
+        fn();
         break;
     }
   });
 }
+
+
+N.wire.once('navigate.done', function init_scroll_tracker() {
+  let timeout_id;
+
+  $(window).on('scroll', function () {
+    scrolling = true;
+    clearTimeout(timeout_id);
+
+    timeout_id = setTimeout(function () {
+      scrolling = false;
+      for (let fn of after_scroll) fn();
+      after_scroll = [];
+    }, 300);
+  });
+});
 
 
 N.wire.on('navigate.done', function append_ads_on_load() {
@@ -74,6 +97,6 @@ N.wire.on('navigate.done', function append_ads_on_load() {
 });
 
 
-N.wire.on('navigate.update', function append_ads_on_update(data) {
+N.wire.on('navigate.update.done', function append_ads_on_update(data) {
   append_ads(data.$);
 });
