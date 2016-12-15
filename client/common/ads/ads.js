@@ -55,7 +55,7 @@ function append_ads(selector) {
 
     switch (ya_script_status) {
       case SCRIPT_NOT_LOADED:
-        $('head').append('<script src="http://an.yandex.ru/system/context.js" type="text/javascript" async></script>');
+        $('head').append('<script src="https://an.yandex.ru/system/context.js" type="text/javascript" async></script>');
         ya_script_status = SCRIPT_LOADING;
 
         window.yandexContextAsyncCallbacks = window.yandexContextAsyncCallbacks || [];
