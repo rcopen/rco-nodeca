@@ -12,14 +12,14 @@ let after_scroll = [];
 
 function remove_block($tag) {
   let scroll_top = $(window).scrollTop();
-  let tag_height = $tag.height();
   let window_center = scroll_top + $(window).height() / 2;
-  let tag_bottom = $tag.offset().top + tag_height;
+  let tag_bottom = $tag.offset().top + $tag.height();
+  let old_height = $(document).height();
 
   $tag.remove();
 
   if (window_center > tag_bottom) {
-    $(window).scrollTop(scroll_top - tag_height);
+    $(window).scrollTop($(window).scrollTop() - old_height + $(document).height());
   }
 }
 
@@ -79,15 +79,16 @@ function append_ads(selector) {
 N.wire.once('navigate.done', function init_scroll_tracker() {
   let timeout_id;
 
+  function on_scroll_stop() {
+    scrolling = false;
+    for (let fn of after_scroll) fn();
+    after_scroll = [];
+  }
+
   $(window).on('scroll', function () {
     scrolling = true;
     clearTimeout(timeout_id);
-
-    timeout_id = setTimeout(function () {
-      scrolling = false;
-      for (let fn of after_scroll) fn();
-      after_scroll = [];
-    }, 300);
+    timeout_id = setTimeout(on_scroll_stop, 300);
   });
 });
 
