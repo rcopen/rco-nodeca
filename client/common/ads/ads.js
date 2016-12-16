@@ -55,11 +55,19 @@ function append_ads(selector) {
 
     switch (ya_script_status) {
       case SCRIPT_NOT_LOADED:
-        $('head').append('<script src="https://an.yandex.ru/system/context.js" type="text/javascript" async></script>');
+        let script = document.createElement('script');
+
+        script.src = 'https://an.yandex.ru/system/context.js';
+        script.type = 'text/javascript';
+        script.async = true;
+
+        document.getElementsByTagName('head')[0].appendChild(script);
+
         ya_script_status = SCRIPT_LOADING;
 
+        script.onload = () => { ya_script_status = SCRIPT_LOADED; };
+
         window.yandexContextAsyncCallbacks = window.yandexContextAsyncCallbacks || [];
-        window.yandexContextAsyncCallbacks.push(() => { ya_script_status = SCRIPT_LOADED; });
         window.yandexContextAsyncCallbacks.push(fn);
         break;
 
@@ -100,4 +108,9 @@ N.wire.on('navigate.done', function append_ads_on_load() {
 
 N.wire.on('navigate.update.done', function append_ads_on_update(data) {
   append_ads(data.$);
+});
+
+
+N.wire.on('navigate.exit', function cleanup_callbacks() {
+  window.yandexContextAsyncCallbacks = [];
 });
