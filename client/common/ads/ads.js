@@ -13,13 +13,13 @@ let after_scroll = [];
 function remove_block($tag) {
   let scroll_top = $(window).scrollTop();
   let window_center = scroll_top + $(window).height() / 2;
-  let tag_bottom = $tag.offset().top + $tag.height();
-  let old_height = $(document).height();
+  let tag_height = $tag.outerHeight(true);
+  let tag_bottom = $tag.offset().top + tag_height;
 
   $tag.remove();
 
   if (window_center > tag_bottom) {
-    $(window).scrollTop($(window).scrollTop() - old_height + $(document).height());
+    $(window).scrollTop(scroll_top - tag_height);
   }
 }
 
