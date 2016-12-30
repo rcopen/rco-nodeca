@@ -27,6 +27,13 @@
     ]
   },
   "dependencies": {
-    "google-libphonenumber": "^2.0.3"
+    "bluebird": "^3.4.6",
+    "google-libphonenumber": "^2.0.3",
+    "got": "^6.7.1",
+    "mz": "^2.6.0",
+    "mkdirp": "^0.5.1"
+  },
+  "scripts": {
+    "install": "node support/install"
   }
 }
