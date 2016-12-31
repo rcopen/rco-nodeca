@@ -1,6 +1,5 @@
 /node_modules/
-/doc/
 /tmp/
-/dicts/
+/sphinx_dicts/lemmatizer
 *.log
 *.swp

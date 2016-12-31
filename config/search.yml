@@ -1,10 +1,12 @@
 search:
+  common:
+    lemmatizer_base: npm:rcd-nodeca/sphinx_dicts/lemmatizer
   indexes:
     default:
       morphology: lemmatize_en,lemmatize_ru,lemmatize_de
+      stopwords: npm:rcd-nodeca/sphinx_dicts/stopwords.txt
       charset_table: 0..9, _, english, russian
       ignore_chars: '-, U+AD'
-      min_stemming_len: 4
-      min_word_len: 1
-      stopwords: rcd-nodeca/config/stopwords.txt
-      wordforms: rcd-nodeca/config/wordforms.txt
+      #min_stemming_len: 4
+      #min_word_len: 1
+      index_exact_words: 1
