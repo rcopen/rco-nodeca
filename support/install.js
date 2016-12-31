@@ -10,7 +10,7 @@ const fs      = require('mz/fs');
 const path    = require('path');
 const mkdirp  = Promise.promisify(require('mkdirp'));
 
-let dict_path = path.resolve(__dirname, '..', 'dicts');
+let dict_path = path.resolve(__dirname, '..', 'sphinx_dicts/lemmatizer');
 
 
 Promise.coroutine(function* () {
@@ -31,7 +31,7 @@ Promise.coroutine(function* () {
     if (exists) continue;
 
     /* eslint-disable no-console */
-    console.log(`Downloading ${lang}.pak...`);
+    console.log(`Downloading lemmatizer dictionary: ${lang}.pak...`);
 
     try {
       yield new Promise((resolve, reject) => {
