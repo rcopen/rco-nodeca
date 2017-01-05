@@ -12,6 +12,7 @@ search:
     # rt_merge_maxiosize: 1M
     attr_flush_period: 900
     queue_max_length: 1000
+    binlog_max_log_size: 512M
 
   common:
     lemmatizer_base: npm:rcd-nodeca/sphinx_dicts/lemmatizer
@@ -34,5 +35,5 @@ search:
       # ? rt_mem_limit
 
     'forum_posts : _default_content':
-      rt_mem_limit: 1G
+      rt_mem_limit: 1024M
     'forum_topics : _default_content': {}
