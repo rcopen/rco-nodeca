@@ -33,6 +33,9 @@
     "mz": "^2.6.0",
     "mkdirp": "^0.5.1"
   },
+  "config": {
+    "unsafe-perm":true
+  },
   "scripts": {
     "install": "node support/install"
   }
