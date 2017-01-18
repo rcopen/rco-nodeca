@@ -37,7 +37,7 @@ test-ci:
 icons:
 	rm -f ./client/common/rcd_logo/logo.svg
 	cp ./src/rcopen_logo-circle.svg ./client/common/rcd_logo/logo.svg
-	sed -i 's/#4a7fb5/#e0e0e0/g' ./client/common/rcd_logo/logo.svg
+	sed -i 's/#4a7fb5/#ffffff/g' ./client/common/rcd_logo/logo.svg
 
 	convert -resize 640x640 -border 40x40 -bordercolor White ./src/rcopen_logo-circle.svg ./static/snippet.jpg
 	./node_modules/.bin/gulp generate-favicon
