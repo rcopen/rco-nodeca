@@ -34,6 +34,6 @@ search:
       # ? expand_keywords
       # ? rt_mem_limit
 
-    'forum_posts : _default_content':
+    'forum_posts : _default':
       rt_mem_limit: 1024M
-    'forum_topics : _default_content': {}
+    'forum_topics : _default': {}
