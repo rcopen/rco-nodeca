@@ -20,7 +20,7 @@ search:
   indexes:
     _default:
       # try *_all
-      morphology: lemmatize_en,lemmatize_ru,lemmatize_de
+      morphology: lemmatize_en_all, lemmatize_ru_all, lemmatize_de_all
       stopwords: npm:rcd-nodeca/sphinx_dicts/stopwords.txt
       stopwords_unstemmed: 1
       # exceptions
@@ -29,11 +29,10 @@ search:
       #min_stemming_len: 4
       #min_word_len: 1
       index_exact_words: 1
-      blend_chars: +, &, U+23, ., @, -
+      blend_chars: -, +, U+23, ., @, &->+
       blend_mode: trim_none, trim_head, trim_tail, skip_pure
-      # ? expand_keywords
+      expand_keywords: 1
       # ? rt_mem_limit
 
     'forum_posts : _default':
-      rt_mem_limit: 1024M
-    'forum_topics : _default': {}
+      rt_mem_limit: 512M
