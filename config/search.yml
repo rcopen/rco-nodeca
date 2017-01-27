@@ -34,5 +34,9 @@ search:
       expand_keywords: 1
       # ? rt_mem_limit
 
+      html_strip: 1
+      html_index_attrs: a=href;
+      html_remove_elements: blockquote
+
     'forum_posts : _default':
       rt_mem_limit: 512M
