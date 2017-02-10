@@ -52,7 +52,25 @@ let args = parser.parseArgs();
 mongoose.Promise = Promise;
 
 Promise.coroutine(function* () {
-  yield mongoose.connect('mongodb://localhost/' + args.db);
+  const mongoose_options = {
+    promiseLibrary: Promise,
+    server: {
+      poolSize: 10,
+      socketOptions: {
+        connectTimeoutMS: 10 * 60 * 1000,
+        keepAlive: 1
+      }
+    },
+    replset: {
+      poolSize: 10,
+      socketOptions: {
+        connectTimeoutMS: 10 * 60 * 1000,
+        keepAlive: 1
+      }
+    }
+  };
+
+  yield mongoose.connect('mongodb://localhost/' + args.db, mongoose_options);
 
   let Post = mongoose.model('forum.Post', new mongoose.Schema());
 
