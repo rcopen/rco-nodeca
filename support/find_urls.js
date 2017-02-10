@@ -32,6 +32,14 @@ parser.addArgument(
 );
 
 parser.addArgument(
+  [ '-l', '--long' ],
+  {
+    help: 'hide short links (without query)',
+    action: 'storeTrue'
+  }
+);
+
+parser.addArgument(
   'domain',
   {
     help: 'domain name'
@@ -69,11 +77,14 @@ Promise.coroutine(function* () {
                      .map(href => _.unescape(href.replace(/^href="|"$/g, '')));
 
         urls.forEach(url => {
-          let parsed = URL.parse(url);
+          let parsed = URL.parse(url, true, true);
 
           if (parsed.host && parsed.host.includes(args.domain)) {
             /* eslint-disable no-console */
-            console.log(url);
+
+            if (args.long) {
+              if (Object.keys(parsed.query).length || parsed.hash) console.log(url, '\n');
+            } else console.log(url, '\n');
           }
         });
 
