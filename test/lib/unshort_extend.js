@@ -1,14 +1,19 @@
+
 'use strict';
 
 
 const assert  = require('assert');
 
 
-describe.only('unshort_extend', function () {
+describe.only('Additional shorteners', function () {
+
+  before(function () {
+    if (!process.env.LINKS_CHECK) this.skip();
+  });
+
+
   /* eslint-disable max-len */
   it('Unshort ali.pub', function () {
-    if (!process.env.LINKS_CHECK) return this.skip();
-
     let url = 'http://ali.pub/y9fu8';
     let data = { url, types: [ 'inline' ] };
 
@@ -20,9 +25,8 @@ describe.only('unshort_extend', function () {
     });
   });
 
-  it('Unshort banggood.app.link', function () {
-    if (!process.env.LINKS_CHECK) return this.skip();
 
+  it('Unshort banggood.app.link', function () {
     let url = 'https://banggood.app.link/IVvWv4dMBy';
     let data = { url, types: [ 'inline' ] };
 
