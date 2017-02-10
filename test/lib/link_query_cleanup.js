@@ -9,6 +9,13 @@ const assert  = require('assert');
 const samples = [
   /* eslint-disable max-len */
 
+  // GA + email marketing
+
+  [
+    'http://store.dji.com/product/mavic-pro?utm_source=newsletter&utm_medium=edm&utm_campaign=mavicen0927&sc_src=email_884153&sc_eh=b887c77a4d9e75871&sc_llid=133584&sc_lid=21286924&sc_uid=LtEcV0kEvu',
+    'http://store.dji.com/product/mavic-pro'
+  ],
+
   // Banggood
 
   [ // own affiliate program
