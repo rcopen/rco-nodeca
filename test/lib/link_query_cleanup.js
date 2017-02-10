@@ -23,6 +23,10 @@ const samples = [
     'http://www.banggood.com/Liantian-LED-Strip-with-4-WS2812B-RG85050-Colorful-LED-Lamp-for-Naze32-CC3D-p-1044127.html?utm_campaign=android-share&utm_source=google-play&utm_medium=organic&android_share=1&_branch_match_id=307168648793035009',
     'http://www.banggood.com/Liantian-LED-Strip-with-4-WS2812B-RG85050-Colorful-LED-Lamp-for-Naze32-CC3D-p-1044127.html'
   ],
+  [
+    'http://www.banggood.com/ru/2_4G-2W-Radio-Signal-Booster-Antenna-Feeder-For-DJI-Phantom-Multirotor-TX-Extend-Range-p-986756.html?rmmds=cart',
+    'http://www.banggood.com/ru/2_4G-2W-Radio-Signal-Booster-Antenna-Feeder-For-DJI-Phantom-Multirotor-TX-Extend-Range-p-986756.html'
+  ],
 
   // Gearbest
 
