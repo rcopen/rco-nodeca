@@ -37,6 +37,12 @@ const samples = [
   [
     'http://www.gearbest.com/kits/pp_265051.html?admitad_uid=f0a6c75626fc2d5c431ce7ea5aacace1',
     'http://www.gearbest.com/kits/pp_265051.html'
+  ],
+
+  // dx.com
+  [
+    'http://www.dx.com/p/rechargeable-4-ch-r-c-helicopter-w-gyroscope-yellow-black-ir-remote-6-x-aa-67080#.VjhPcbfhCM8',
+    'http://www.dx.com/p/rechargeable-4-ch-r-c-helicopter-w-gyroscope-yellow-black-ir-remote-6-x-aa-67080'
   ]
 ];
 
