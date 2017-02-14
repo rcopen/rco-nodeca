@@ -47,6 +47,10 @@ const samples = [
     'http://www.ebay.com/itm/Emax-RS2205-2600KV-Racing-Edition-CCW-Motor-for-FPV-Multicopter-RC-Quadcopter/282062341166?_trksid=p2047675.c100005.m1851&_trkparms=aid%3',
     'http://www.ebay.com/itm/Emax-RS2205-2600KV-Racing-Edition-CCW-Motor-for-FPV-Multicopter-RC-Quadcopter/282062341166'
   ],
+  [
+    'http://www.ebay.com/itm/Axial-AE-2-ESC-with-Drag-Brake-Wraith-Dingo-Honcho-/350555699509#ht_2864wt_709',
+    'http://www.ebay.com/itm/Axial-AE-2-ESC-with-Drag-Brake-Wraith-Dingo-Honcho-/350555699509'
+  ],
 
   // Banggood
 
