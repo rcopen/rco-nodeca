@@ -89,6 +89,10 @@ const samples = [
     'http://www.gearbest.com/rc-quadcopter-parts/pp_270377.html?wid=21',
     'http://www.gearbest.com/rc-quadcopter-parts/pp_270377.html'
   ],
+  [
+    'http://www.gearbest.com/rc-quadcopters/pp_424346.html?wid=21&utm_source=mail_api&utm_medium=mail&utm_campaign=regular.0207&eo=f86aSuVzPAkf4VdW&email=b2t8YXJzZW4zNTlAeWFuZGV4LnJ1fDEyMTQ2',
+    'http://www.gearbest.com/rc-quadcopters/pp_424346.html'
+  ],
 
   // dx.com
   [
