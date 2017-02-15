@@ -1,0 +1,13 @@
+setting_schemas:
+  global:
+    ban_ip:
+      priority: 50
+      group_key: register
+      category_key: register_common
+      type: multiline
+
+    ban_email:
+      priority: 60
+      group_key: register
+      category_key: register_common
+      type: multiline

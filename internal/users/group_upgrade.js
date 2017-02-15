@@ -33,7 +33,12 @@
 //     Any user in `just_registered` group is moved to `novices`
 //     as long as they are registered more than 1 day ago.
 //
-//  5. `novices` -> `members` (30 days after registration)
+//  5. `just_registered` -> `banned` (1 day after registration)
+//
+//     If user ip or email is in the ban list, they're moved to
+//     `banned` instead of `novices`.
+//
+//  6. `novices` -> `members` (30 days after registration)
 //
 //     Any user in `novices` group is moved to `members`
 //     as long as they are registered more than 30 days ago.
@@ -42,7 +47,46 @@
 'use strict';
 
 
+const _       = require('lodash');
+const Promise = require('bluebird');
+
+
 module.exports = function (N, apiPath) {
+
+  // Check user ip and email against ban lists
+  //
+  const is_user_banned = Promise.coroutine(function* (user) {
+    let store = N.settings.getStore('global');
+
+    let ban_ip = yield store.get('ban_ip');
+
+    if (ban_ip.value.trim().length) {
+      let ban_ip_re = new RegExp(
+        '^(?:' + ban_ip.value.split(/\s+/)
+                          .map(ip => _.escapeRegExp(ip) + (ip.slice(-1) === '.' ? '\\d+(?:\\.\\d+)*' : ''))
+                          .join('|') + ')$',
+        'i'
+      );
+
+      if (ban_ip_re.test(user.joined_ip)) return true;
+    }
+
+    let ban_email = yield store.get('ban_email');
+
+    if (ban_email.value.trim().length) {
+      let ban_email_re = new RegExp(
+        ban_email.value.split(/\s+/)
+                       .map(_.escapeRegExp)
+                       .join('|'),
+        'i'
+      );
+
+      if (ban_email_re.test(user.email)) return true;
+    }
+
+    return false;
+  });
+
 
   N.wire.before(apiPath, { priority: -100 }, function group_upgrade_init(locals) {
     locals.upgraded = {};
@@ -61,9 +105,12 @@ module.exports = function (N, apiPath) {
 
     let users = yield query.lean(true);
 
+    if (!users.length) return;
+
+    let grp_members = yield N.models.users.UserGroup.findIdByName('members');
+
     for (let user of users) {
       let usergroups  = user.usergroups;
-      let grp_members = yield N.models.users.UserGroup.findIdByName('members');
 
       // remove old group, and make sure new group isn't already present
       usergroups = user.usergroups.filter(group =>
@@ -78,6 +125,7 @@ module.exports = function (N, apiPath) {
 
 
   // `just_registered` -> `novices` (1 day after registration)
+  // `just_registered` -> `banned` (1 day after registration)
   N.wire.on(apiPath, function* upgrade_just_registered(locals) {
     let grp_just_registered = yield N.models.users.UserGroup.findIdByName('just_registered');
 
@@ -89,15 +137,21 @@ module.exports = function (N, apiPath) {
 
     let users = yield query.lean(true);
 
+    if (!users.length) return;
+
+    let grp_novices = yield N.models.users.UserGroup.findIdByName('novices');
+    let grp_banned  = yield N.models.users.UserGroup.findIdByName('banned');
+
     for (let user of users) {
-      let usergroups  = user.usergroups;
-      let grp_novices = yield N.models.users.UserGroup.findIdByName('novices');
+      let usergroups = user.usergroups;
+
+      let target_usergroup = (yield is_user_banned(user)) ? grp_banned : grp_novices;
 
       // remove old group, and make sure new group isn't already present
       usergroups = user.usergroups.filter(group =>
-                     ![ String(grp_just_registered), String(grp_novices) ].includes(String(group)));
+                     ![ String(target_usergroup), String(grp_just_registered) ].includes(String(group)));
 
-      usergroups.push(grp_novices);
+      usergroups.push(target_usergroup);
 
       yield N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
       locals.upgraded[user._id] = true;
@@ -122,9 +176,11 @@ module.exports = function (N, apiPath) {
 
     let users = yield query.lean(true);
 
-    for (let user of users) {
-      let just_registered = yield N.models.users.UserGroup.findIdByName('just_registered');
+    if (!users.length) return;
 
+    let just_registered = yield N.models.users.UserGroup.findIdByName('just_registered');
+
+    for (let user of users) {
       // remove old group, and make sure new group isn't already present
       let usergroups = user.usergroups.filter(group =>
                          ![ String(grp_incomplete_profile), String(just_registered) ].includes(String(group)));
@@ -174,6 +230,8 @@ module.exports = function (N, apiPath) {
     if (locals.user_id) query = query.where('_id').equals(locals.user_id);
 
     let users = yield query.lean(true);
+
+    if (!users.length) return;
 
     for (let user of users) {
       let first_name = user.first_name;
