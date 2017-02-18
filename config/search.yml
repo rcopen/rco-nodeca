@@ -18,7 +18,7 @@ search:
     lemmatizer_base: npm:rcd-nodeca/sphinx_dicts/lemmatizer
 
   indexes:
-    _default:
+    _default_base:
       # try *_all
       morphology: lemmatize_en_all, lemmatize_ru_all, lemmatize_de_all
       stopwords: npm:rcd-nodeca/sphinx_dicts/stopwords.txt
@@ -28,15 +28,8 @@ search:
       ignore_chars: U+AD
       #min_stemming_len: 4
       #min_word_len: 1
-      index_exact_words: 1
       blend_chars: -, +, U+23, ., @, &->+
       blend_mode: trim_none, trim_head, trim_tail, skip_pure
-      expand_keywords: 1
-      # ? rt_mem_limit
 
-      html_strip: 1
-      html_index_attrs: a=href;
-      html_remove_elements: blockquote
-
-    'forum_posts : _default':
+    'forum_posts : _default_content':
       rt_mem_limit: 512M
