@@ -1,0 +1,39 @@
+@import "nodeca.core/client/common/_variables"
+
+$dev-warning-height = $nav-panel-height
+
+.dev-warning
+  display none
+  align-items center
+  padding 0 1rem
+
+  background-color $brand-danger
+.dev-warning__text
+  text-align center
+  width 100%
+  color white
+  a
+    color white
+    text-decoration underline
+
+.dev-warning__aside
+  width 1.5rem
+
+.dev-warning-on
+  .dev-warning
+    display flex
+    position fixed
+    top 0
+    height $dev-warning-height
+    width 100%
+    z-index 1031
+
+  body
+    padding-top $dev-warning-height + $nav-panel-height
+
+  .fixed-top
+  .navbar__m-secondary.navbar-alt
+    top: $dev-warning-height
+
+  .navbar-alt
+    top 0
