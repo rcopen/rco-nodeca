@@ -12,7 +12,7 @@
     "gulp-real-favicon": "^0.2.1",
     "is-my-json-valid": "^2.15.0",
     "lodash": "^4.17.1",
-    "send": "^0.14.1"
+    "send": "^0.15.0"
   },
   "browserify": {
     "transform": [
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.6",
-    "google-libphonenumber": "^2.0.3",
+    "google-libphonenumber": "^2.0.10",
     "got": "^6.7.1",
     "mz": "^2.6.0",
     "mkdirp": "^0.5.1"
