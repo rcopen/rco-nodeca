@@ -12,7 +12,8 @@ exports.up = Promise.coroutine(function* (N) {
     { name: 'moderators', parent: 'members' },
     { name: 'che' },
     { name: 'losers' },
-    { name: 'frozen' }
+    { name: 'frozen' },
+    { name: 'vb_imported' }
   ];
 
   for (let config of usergroups) {
@@ -72,6 +73,16 @@ exports.up = Promise.coroutine(function* (N) {
     can_edit_profile:  { value: true },
     can_receive_email: { value: true }
   }, { usergroup_id: grp_incomplete_profile });
+
+  // add usergroup settings for vb_imported group
+
+  let grp_vb_imported = yield N.models.users.UserGroup.findIdByName('vb_imported');
+
+  yield usergroupStore.set({
+    can_edit_profile:  { value: true },
+    can_receive_email: { value: true },
+    can_use_dialogs:   { value: true }
+  }, { usergroup_id: grp_vb_imported });
 
   // add usergroup settings for just_registered group
 

@@ -17,12 +17,12 @@
 //     `incomplete_profile` usergroup. It can be used to reset
 //     usergroups when un-freezing a user.
 //
-//  2. `incomplete_profile` -> `just_registered` (fill profile)
+//  2. `incomplete_profile`, `vb_imported` -> `just_registered` (fill profile)
 //
 //     If user has "about me" data filled (first name, last name,
 //     birthday and location), they are moved to `just_registered`
 //
-//  3. `incomplete_profile` -> `che` (fill profile)
+//  3. `incomplete_profile`, `vb_imported` -> `che` (fill profile)
 //
 //     If user has "about me" data filled, but we don't like the
 //     way they did it (unexpected characters in the name, for
@@ -159,7 +159,7 @@ module.exports = function (N, apiPath) {
   });
 
 
-  // `incomplete_profile` -> `just_registered` (fill profile)
+  // `incomplete_profile`, `vb_imported` -> `just_registered` (fill profile)
   //
   // This rule applies if user already submitted a valid profile a while ago,
   // and `incomplete_profile` is group was added since as an intermediate group,
@@ -167,9 +167,10 @@ module.exports = function (N, apiPath) {
   //
   N.wire.on(apiPath, function* upgrade_incomplete_profile(locals) {
     let grp_incomplete_profile = yield N.models.users.UserGroup.findIdByName('incomplete_profile');
+    let grp_vb_imported        = yield N.models.users.UserGroup.findIdByName('vb_imported');
 
     let query = N.models.users.User.find()
-                    .where('usergroups').equals(grp_incomplete_profile)
+                    .where('usergroups').in([ grp_incomplete_profile, grp_vb_imported ])
                     .where('incomplete_profile').equals(false);
 
     if (locals.user_id) query = query.where('_id').equals(locals.user_id);
@@ -182,8 +183,8 @@ module.exports = function (N, apiPath) {
 
     for (let user of users) {
       // remove old group, and make sure new group isn't already present
-      let usergroups = user.usergroups.filter(group =>
-                         ![ String(grp_incomplete_profile), String(just_registered) ].includes(String(group)));
+      let remove_groups = [ grp_incomplete_profile, grp_vb_imported, just_registered ].map(String);
+      let usergroups = user.usergroups.filter(group => !remove_groups.includes(String(group)));
 
       usergroups.push(just_registered);
 
@@ -205,8 +206,8 @@ module.exports = function (N, apiPath) {
   }
 
 
-  // `incomplete_profile` -> `just_registered` (fill profile)
-  // `incomplete_profile` -> `che` (fill profile)
+  // `incomplete_profile`, `vb_imported` -> `just_registered` (fill profile)
+  // `incomplete_profile`, `vb_imported` -> `che` (fill profile)
   //
   // This rule applies if user have just submitted a profile change,
   // so we need to verify if data is valid.
@@ -218,9 +219,10 @@ module.exports = function (N, apiPath) {
     if (!locals.user_id) return;
 
     let grp_incomplete_profile = yield N.models.users.UserGroup.findIdByName('incomplete_profile');
+    let grp_vb_imported        = yield N.models.users.UserGroup.findIdByName('vb_imported');
 
     let query = N.models.users.User.find()
-                    .where('usergroups').equals(grp_incomplete_profile)
+                    .where('usergroups').in([ grp_incomplete_profile, grp_vb_imported ])
                     .where('first_name').exists()
                     .where('last_name').exists()
                     .where('location').exists()
@@ -262,8 +264,8 @@ module.exports = function (N, apiPath) {
       }
 
       // remove old group, and make sure new group isn't already present
-      usergroups = user.usergroups.filter(group =>
-                     ![ String(grp_incomplete_profile), String(new_group) ].includes(String(group)));
+      let remove_groups = [ grp_incomplete_profile, grp_vb_imported, new_group ].map(String);
+      usergroups = user.usergroups.filter(group => !remove_groups.includes(String(group)));
 
       usergroups.push(new_group);
 

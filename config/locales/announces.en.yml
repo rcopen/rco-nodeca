@@ -7,6 +7,11 @@ i18n:
             This forum does not allow to post anonymously. To unlock the ability to
             post new messages, please fill in your full name, age and location
             in [your profile](/settings/about).
+        vb_imported: |
+          md:
+            This forum does not allow to post anonymously. To unlock the ability to
+            post new messages, please fill in your full name, age and location
+            in [your profile](/settings/about).
         just_registered: |
           The ability to post new messages will be unlocked a day after
           registration. Although, if you did read the rules carefully, you
