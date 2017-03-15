@@ -15,6 +15,6 @@ N.wire.once('navigate.done', function show_dev_warning() {
 
   N.wire.on(module.apiPath + ':close', function hide_dev_warning() {
     $('html').removeClass('dev-warning-on');
-    document.cookie = `dev_warning_off=1; max-age=${7 * 24 * 3600}`;
+    document.cookie = `dev_warning_off=1; path=/; max-age=${7 * 24 * 3600}`;
   });
 });
