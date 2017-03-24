@@ -6,7 +6,7 @@
 - function mod(d, n) { return (d % n + n) % n; }
 
 //- show ads to guests only
-if self.runtime.is_guest
+if !self.runtime.is_member
   if self.pagination && mod(self.post_counter, self.pagination.per_page) === 0
     - var visible = [ postStatuses.DELETED, postStatuses.DELETED_HARD, postStatuses.HB ].indexOf(self.posts[self.post_idx].st) === -1;
 
