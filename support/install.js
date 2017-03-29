@@ -1,55 +1,83 @@
 // Download morphology dictionaries from
 // http://sphinxsearch.com/downloads/dicts/
 //
-
 'use strict';
 
-const Promise = require('bluebird');
-const got     = require('got');
-const fs      = require('mz/fs');
-const path    = require('path');
-const mkdirp  = Promise.promisify(require('mkdirp'));
+/* eslint-disable no-console */
+
+const fs   = require('fs');
+const path = require('path');
+const http = require('http');
+
 
 let dict_path = path.resolve(__dirname, '..', 'sphinx_dicts/lemmatizer');
 
 
-Promise.coroutine(function* () {
-  yield mkdirp(dict_path);
-
-  for (let lang of [ 'en', 'ru', 'de' ]) {
-    let exists = true;
-    let filename = path.join(dict_path, lang + '.pak');
-
-    try {
-      yield fs.stat(filename);
-    } catch (err) {
-      if (err.code === 'ENOENT') {
-        exists = false;
-      }
+// Create directory if needed
+dict_path
+  .split(/\\|\//g)
+  .reduce((p, base) => {
+    p += base + path.sep;
+    if (!fs.existsSync(p)){
+      fs.mkdirSync(p);
     }
+    return p;
+  }, '');
 
-    if (exists) continue;
+function download(lang) {
+  let filename = path.join(dict_path, lang + '.pak');
+  let file_tmp = filename + '.partial';
+  let file_url = `http://sphinxsearch.com/files/dicts/${lang}.pak`;
 
-    /* eslint-disable no-console */
-    console.log(`Downloading lemmatizer dictionary: ${lang}.pak...`);
+  return Promise.resolve().then(() => {
+    let p = new Promise((resolve, reject) => {
 
-    try {
-      yield new Promise((resolve, reject) => {
-        let stream = got.stream(`http://sphinxsearch.com/files/dicts/${lang}.pak`, { retries: 1 });
+      if (fs.existsSync(filename)) {
+        resolve(false);
+        return;
+      }
 
-        stream.pipe(fs.createWriteStream(filename + '.partial'));
+      console.log(`Downloading lemmatizer dictionary: ${lang}.pak...`);
 
-        stream.on('error', err => reject(err));
-        stream.on('end', () => resolve());
+      let fileStream = fs.createWriteStream(file_tmp);
+
+      let req = http.get(file_url, res => {
+        if (res.statusCode !== 200) {
+          reject(new Error(`Bad status code fo ${file_url}: ${res.statusCode}`));
+          return;
+        }
+
+        res.pipe(fileStream);
+
+        fileStream.on('finish', () => {
+          fileStream.end();
+          resolve(true);
+        });
+
+        res.on('close', () => reject(new Error('download terminated')));
       });
 
-      yield fs.rename(filename + '.partial', filename);
-    } catch (err) {
-      yield fs.unlink(filename + '.partial');
+      req.on('error', err => reject(err));
+
+      fileStream.on('error', err => reject(err));
+    });
+
+    return p.then(downloaded => {
+      if (downloaded) {
+        fs.renameSync(file_tmp, filename);
+      }
+    })
+    .catch(err => {
+      try { fs.unlinkSync(filename); } catch (__) {}
+      try { fs.unlinkSync(file_tmp); } catch (__) {}
       throw err;
-    }
-  }
-})().catch(err => {
-  console.error(err.stack);
-  process.exit(1);
-});
+    });
+  });
+}
+
+
+Promise.all([ 'en', 'ru', 'de' ].map(lang => download(lang)))
+  .catch(err => {
+    console.log(err);
+    throw err;
+  });
