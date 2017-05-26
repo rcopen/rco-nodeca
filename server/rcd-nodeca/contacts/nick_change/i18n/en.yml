@@ -1,0 +1,10 @@
+en-US:
+  exec:
+    email_subject: '#{project_name}: Хочу сменить ник — #{username}'
+
+    email_text: |
+      Пользователь: #{name}
+      URL: #{profile}
+      Новый ник: #{nick}
+
+    err_busy_nick: This nick is already used.

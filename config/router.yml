@@ -3,3 +3,28 @@ router:
     rcd-nodeca.static:
       "/{path}":
         path: /snippet[.]jpg|android-chrome-192x192[.]png|android-chrome-512x512[.]png|apple-touch-icon-120x120-precomposed[.]png|apple-touch-icon-120x120[.]png|apple-touch-icon-152x152-precomposed[.]png|apple-touch-icon-152x152[.]png|apple-touch-icon-180x180-precomposed[.]png|apple-touch-icon-180x180[.]png|apple-touch-icon-60x60-precomposed[.]png|apple-touch-icon-60x60[.]png|apple-touch-icon-76x76-precomposed[.]png|apple-touch-icon-76x76[.]png|apple-touch-icon-precomposed[.]png|apple-touch-icon[.]png|browserconfig[.]xml|favicon-16x16[.]png|favicon-32x32[.]png|favicon[.]ico|manifest[.]json|mstile-144x144[.]png|mstile-150x150[.]png|mstile-310x150[.]png|mstile-310x310[.]png|mstile-70x70[.]png|safari-pinned-tab[.]svg/
+
+  http.get:
+    rcd-nodeca.contacts:
+      "/contacts": ~
+
+    rcd-nodeca.contacts.sales:
+      "/contacts/sales": ~
+
+    rcd-nodeca.contacts.support:
+      "/contacts/support": ~
+
+    rcd-nodeca.contacts.nick_change:
+      "/contacts/nick_change": ~
+
+    rcd-nodeca.contacts.user_update:
+      "/contacts/user_update": ~
+
+    rcd-nodeca.contacts.mod_appeal:
+      "/contacts/mod_appeal": ~
+
+    admin.rcd-nodeca.update_by_link:
+      "/members/update_by_link/{user_hid}":
+        user_hid:
+          match: /\d+/
+          type: 'integer'
