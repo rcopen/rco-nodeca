@@ -1,0 +1,27 @@
+@import "nodeca.core/client/common/_variables"
+
+.contacts__list
+  font-size 1.125rem
+  list-style none
+  padding 0
+
+.contacts__item
+  margin-bottom 1.25rem
+
+triangle-size = .25rem
+
+.contacts__link
+  color $body-color
+
+  // triangle
+  &:before
+    display inline-block
+    border-style solid
+    border-width triangle-size 0 triangle-size (triangle-size * 1.4)
+    border-color transparent transparent transparent ($decorator-color - 5%)
+    content ''
+    margin-right .7em
+    vertical-align middle
+
+.contact-form-textarea
+  min-height 10rem

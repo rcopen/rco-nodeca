@@ -6,6 +6,7 @@ bundles:
 packages:
   admin:
     entries:
+      - client/admin
       - server/admin
 
   common:
@@ -23,4 +24,10 @@ packages:
       - internal/users
       - server/users
 
-  rcd-nodeca: {}
+  rcd-nodeca:
+    depends:
+      - common
+
+    entries:
+      - client/rcd-nodeca
+      - server/rcd-nodeca

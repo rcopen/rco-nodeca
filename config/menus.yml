@@ -5,4 +5,4 @@ menus:
         to: common.rules
 
       contacts:
-        to: ~
+        to: rcd-nodeca.contacts

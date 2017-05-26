@@ -1,0 +1,21 @@
+en-US:
+  exec:
+    email_subject: '#{project_name}: Вопрос администраторам форума'
+
+    email_text_guest: |
+      Имя: #{name}
+      Email: #{email}
+
+      Сообщение:
+      ---------------------------
+      #{message}
+
+    email_text_member: |
+      Пользователь: #{name}
+      URL: #{profile}
+
+      Сообщение:
+      ---------------------------
+      #{message}
+
+    err_wrong_captcha: CAPTCHA verification failed, try again.
