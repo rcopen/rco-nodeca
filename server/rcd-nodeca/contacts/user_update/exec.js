@@ -34,9 +34,9 @@ module.exports = function (N, apiPath) {
   const validate = validator({
     type: 'object',
     properties: {
-      firstname:  { type: 'string', required: true },
-      lastname:   { type: 'string', required: true },
-      birthday:   { type: 'string', required: true }
+      firstname:  { type: 'string', required: true, minLength: 1 },
+      lastname:   { type: 'string', required: true, minLength: 1 },
+      birthday:   { type: 'string', required: true, minLength: 1 }
     }
   }, {
     verbose: true
