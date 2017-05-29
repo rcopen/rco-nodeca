@@ -3,7 +3,7 @@ en-US:
     email_subject: '#{project_name}: Вопрос администраторам форума'
 
     email_text_guest: |
-      Имя: #{name}
+      Кто:   #{name}
       Email: #{email}
 
       Сообщение:
@@ -11,8 +11,7 @@ en-US:
       #{message}
 
     email_text_member: |
-      Пользователь: #{name}
-      URL: #{profile}
+      Пользователь: #{name}, #{profile}
 
       Сообщение:
       ---------------------------

@@ -3,18 +3,19 @@ en-US:
     email_subject: '#{project_name}: Вопрос по рекламе'
 
     email_text_guest: |
-      Имя: #{name}
+      Кто:   #{name}
       Email: #{email}
-      Адрес сайта: #{url}
+
+      Для сайта: #{url}
 
       Сообщение:
       ---------------------------
       #{message}
 
     email_text_member: |
-      Пользователь: #{name}
-      URL: #{profile}
-      Адрес сайта: #{url}
+      Пользователь: #{name}, #{profile}
+
+      Для сайта: #{url}
 
       Сообщение:
       ---------------------------
