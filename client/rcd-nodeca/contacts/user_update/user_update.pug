@@ -17,7 +17,7 @@
 
     form.mb-4(data-on-submit='rcd-nodeca.contacts.user_update:submit')
       // ko with: firstname
-      .form-group(data-bind='css: { "has-danger": hasError }')
+      .form-group(data-bind='css: { "has-danger": error }')
         label(for='contact-form-firstname')= self.t('field_firstname')
         input.form-control(
           id='contact-form-firstname'
@@ -30,7 +30,7 @@
       // /ko
 
       // ko with: lastname
-      .form-group(data-bind='css: { "has-danger": hasError }')
+      .form-group(data-bind='css: { "has-danger": error }')
         label(for='contact-form-lastname')= self.t('field_lastname')
         input.form-control(
           id='contact-form-lastname'
@@ -43,7 +43,7 @@
       // /ko
 
       // ko with: birthday
-      .form-group(data-bind='css: { "has-danger": hasError }')
+      .form-group(data-bind='css: { "has-danger": error }')
         label(for='contact-form-birthday')= self.t('field_birthday')
         .input-group
           input.form-control(
