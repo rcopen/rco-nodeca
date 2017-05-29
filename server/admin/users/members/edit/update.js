@@ -34,4 +34,36 @@ module.exports = function (N, apiPath) {
     env.data.user.incomplete_profile = !complete;
   });
 
+
+  // If first_name, last_name or birthday are edited, and user is in che group,
+  // remove that group.
+  //
+  N.wire.before(apiPath, { priority: -5 }, async function remove_che_group(env) {
+    // don't change usergroups if they're already changed manually
+    if (env.data.user.isModified('usergroups')) return;
+
+    if (!env.data.user.isModified('first_name') &&
+        !env.data.user.isModified('last_name') &&
+        !env.data.user.isModified('about.birthday')) return;
+
+    let grp_che = await N.models.users.UserGroup.findIdByName('che');
+
+    if (!env.data.user.usergroups.some(group => String(group) === String(grp_che))) return;
+
+    let new_group = await N.settings.get('registered_user_group');
+
+    // remove old groups, and make sure new group isn't already present
+    env.data.user.usergroups = env.data.user.usergroups.filter(group =>
+                               ![ String(grp_che), String(new_group) ].includes(String(group)));
+
+    env.data.user.usergroups.push(new_group);
+    env.data.need_group_upgrade = true;
+  });
+
+
+  N.wire.after(apiPath, async function group_upgrade(env) {
+    if (env.data.need_group_upgrade) {
+      await N.wire.emit('internal:users.group_upgrade', { user_id: env.data.user._id });
+    }
+  });
 };
