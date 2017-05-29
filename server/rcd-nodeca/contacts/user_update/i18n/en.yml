@@ -3,10 +3,10 @@ en-US:
     email_subject: '#{project_name}: Исправление данных профиля — #{username}'
 
     email_text: |
-      Пользователь: #{name}
-      URL: #{profile}
-      Имя: #{firstname}
-      Фамилия: #{lastname}
+      Пользователь: #{name}, #{profile}
+
+      Имя:           #{firstname}
+      Фамилия:       #{lastname}
       Дата рождения: #{birthday}
 
       #{link}

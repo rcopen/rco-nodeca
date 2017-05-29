@@ -3,8 +3,7 @@ en-US:
     email_subject: '#{project_name}: Жалоба на модератора'
 
     email_text: |
-      Пользователь: #{name}
-      URL: #{profile}
+      Пользователь: #{name}, #{profile}
 
       Сообщение:
       ---------------------------
