@@ -17,7 +17,7 @@
 
     form.mb-4(data-on-submit='rcd-nodeca.contacts.nick_change:submit')
       // ko with: nick
-      .form-group(data-bind='css: { "has-danger": hasError }')
+      .form-group(data-bind='css: { "has-danger": error }')
         label(for='contact-form-nick')= self.t('field_nick')
         input.form-control(
           id='contact-form-nick'
@@ -26,8 +26,8 @@
           data-bind='value: value'
         )
 
-        // ko if: message
-        .form-control-feedback(data-bind='text: message')
+        // ko if: error
+        .form-control-feedback(data-bind='text: error')
         // /ko
       // /ko
 

@@ -16,8 +16,7 @@ let view = null;
 function Control() {
   const ko = require('knockout');
 
-  this.hasError = ko.observable(false);
-  this.message  = ko.observable(null);
+  this.error    = ko.observable(null);
   this.value    = ko.observable('');
 }
 
@@ -41,8 +40,7 @@ N.wire.on('navigate.done:' + module.apiPath, function page_setup() {
 
   // Reset nick CSS class and message on every change.
   view.nick.value.subscribe(() => {
-    view.nick.hasError(false);
-    view.nick.message(null);
+    view.nick.error(null);
   });
 
   // Setup automatic nick validation on input.
@@ -51,8 +49,7 @@ N.wire.on('navigate.done:' + module.apiPath, function page_setup() {
 
     N.io.rpc('users.auth.check_nick', { nick: text })
       .then(res => {
-        view.nick.hasError(!!res.error);
-        view.nick.message(res.message);
+        view.nick.error(res.error ? res.message : null);
       });
   }, CHECK_NICK_DELAY));
 
@@ -91,8 +88,7 @@ N.wire.once('navigate.done:' + module.apiPath, function page_once() {
         _.forEach(view, (field, name) => {
           if (name === 'submitted') return;
 
-          field.hasError(_.has(err.data, name));
-          field.message(err.data[name]);
+          field.error(err.data[name]);
         });
       });
   });
