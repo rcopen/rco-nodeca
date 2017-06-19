@@ -6,6 +6,7 @@
 const _           = require('lodash');
 const validator   = require('is-my-json-valid');
 const email_regex = require('email-regex');
+const encode      = require('emailjs-mime-codec').mimeWordEncode;
 const recaptcha   = require('nodeca.core/lib/app/recaptcha');
 
 
@@ -110,8 +111,10 @@ module.exports = function (N, apiPath) {
         message: env.params.message
       });
 
-      from_name  = env.user_info.user_name;
-      from_email = (await N.models.users.User.findById(env.user_info.user_id)).email;
+      let user = await N.models.users.User.findById(env.user_info.user_id);
+
+      from_name  = user.nick;
+      from_email = user.email;
 
     } else {
       text = env.t('email_text_guest', {
@@ -124,14 +127,15 @@ module.exports = function (N, apiPath) {
       from_email = env.params.email;
     }
 
-    let replyTo = `"${from_name}" <${from_email}>`;
+    let from = `"${encode(from_name)} @ ${encode(general_project_name)}" <${N.config.email.from}>`;
 
     for (let email of emails) {
       await N.mailer.send({
+        from,
         to: email,
         subject,
         text,
-        replyTo
+        replyTo: from_email
       });
     }
   });

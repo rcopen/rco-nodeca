@@ -4,6 +4,7 @@
 'use strict';
 
 const _         = require('lodash');
+const encode    = require('emailjs-mime-codec').mimeWordEncode;
 const validator = require('is-my-json-valid');
 
 
@@ -97,17 +98,19 @@ module.exports = function (N, apiPath) {
       })
     });
 
-    let from_name  = env.user_info.user_name;
-    let from_email = (await N.models.users.User.findById(env.user_info.user_id)).email;
+    let user = await N.models.users.User.findById(env.user_info.user_id);
+    let from_name  = user.nick;
+    let from_email = user.email;
 
-    let replyTo = `"${from_name}" <${from_email}>`;
+    let from = `"${encode(from_name)} @ ${encode(general_project_name)}" <${N.config.email.from}>`;
 
     for (let email of emails) {
       await N.mailer.send({
+        from,
         to: email,
         subject,
         text,
-        replyTo
+        replyTo: from_email
       });
     }
   });
