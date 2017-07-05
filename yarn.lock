@@ -2,6 +2,6 @@
 # yarn lockfile v1
 
 
-google-libphonenumber@^2.0.14:
-  version "2.0.19"
-  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-2.0.19.tgz#a6d5ff60412aa33b161bb830d70aa39682583054"
+google-libphonenumber@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.0.0.tgz#65548a85d431e129dcd08f79c641b5d8e9ed662a"
