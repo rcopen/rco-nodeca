@@ -6,9 +6,8 @@
 
 const _        = require('lodash');
 const argparse = require('argparse');
-const Promise  = require('bluebird');
 const mongoose = require('mongoose');
-const pump     = require('pump');
+const pump     = require('util').promisify(require('pump'));
 const stream   = require('stream');
 const URL      = require('url');
 
@@ -51,9 +50,8 @@ let args = parser.parseArgs();
 
 mongoose.Promise = Promise;
 
-Promise.coroutine(function* () {
+async function search() {
   const mongoose_options = {
-    promiseLibrary: Promise,
     server: {
       poolSize: 10,
       socketOptions: {
@@ -70,7 +68,7 @@ Promise.coroutine(function* () {
     }
   };
 
-  yield mongoose.connect('mongodb://localhost/' + args.db, mongoose_options);
+  await mongoose.connect('mongodb://localhost/' + args.db, mongoose_options);
 
   let Post = mongoose.model('forum.Post', new mongoose.Schema());
 
@@ -85,7 +83,7 @@ Promise.coroutine(function* () {
     query._id = { $gt: min_objectid };
   }
 
-  yield Promise.fromCallback(callback => pump(
+  await pump(
     Post.find(query).lean(true).cursor(),
 
     new stream.Writable({
@@ -108,10 +106,10 @@ Promise.coroutine(function* () {
 
         callback();
       }
-    }),
+    })
+  );
 
-    callback
-  ));
+  await mongoose.disconnect();
+}
 
-  yield mongoose.disconnect();
-})();
+search();
