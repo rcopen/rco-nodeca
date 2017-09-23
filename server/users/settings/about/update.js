@@ -80,7 +80,7 @@ module.exports = function (N, apiPath) {
 
   // Profile update for `incomplete_profile` usergroup triggers group upgrade
   //
-  N.wire.after(apiPath, { priority: 30 }, function* group_upgrade(env) {
-    yield N.wire.emit('internal:users.group_upgrade', { user_id: env.data.user._id });
+  N.wire.after(apiPath, { priority: 30 }, async function group_upgrade(env) {
+    await N.wire.emit('internal:users.group_upgrade', { user_id: env.data.user._id });
   });
 };

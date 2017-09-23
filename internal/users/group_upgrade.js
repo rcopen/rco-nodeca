@@ -48,17 +48,16 @@
 
 
 const _       = require('lodash');
-const Promise = require('bluebird');
 
 
 module.exports = function (N, apiPath) {
 
   // Check user ip and email against ban lists
   //
-  const is_user_banned = Promise.coroutine(function* (user) {
+  async function is_user_banned(user) {
     let store = N.settings.getStore('global');
 
-    let ban_ip = yield store.get('ban_ip');
+    let ban_ip = await store.get('ban_ip');
 
     if (ban_ip.value.trim().length) {
       let ban_ip_re = new RegExp(
@@ -71,7 +70,7 @@ module.exports = function (N, apiPath) {
       if (ban_ip_re.test(user.joined_ip)) return true;
     }
 
-    let ban_email = yield store.get('ban_email');
+    let ban_email = await store.get('ban_email');
 
     if (ban_email.value.trim().length) {
       let ban_email_re = new RegExp(
@@ -85,7 +84,7 @@ module.exports = function (N, apiPath) {
     }
 
     return false;
-  });
+  }
 
 
   N.wire.before(apiPath, { priority: -100 }, function group_upgrade_init(locals) {
@@ -94,8 +93,8 @@ module.exports = function (N, apiPath) {
 
 
   // `novices` -> `members` (30 days after registration)
-  N.wire.on(apiPath, function* upgrade_novices(locals) {
-    let grp_novices = yield N.models.users.UserGroup.findIdByName('novices');
+  N.wire.on(apiPath, async function upgrade_novices(locals) {
+    let grp_novices = await N.models.users.UserGroup.findIdByName('novices');
 
     let query = N.models.users.User.find()
                     .where('usergroups').equals(grp_novices)
@@ -103,11 +102,11 @@ module.exports = function (N, apiPath) {
 
     if (locals.user_id) query = query.where('_id').equals(locals.user_id);
 
-    let users = yield query.lean(true);
+    let users = await query.lean(true);
 
     if (!users.length) return;
 
-    let grp_members = yield N.models.users.UserGroup.findIdByName('members');
+    let grp_members = await N.models.users.UserGroup.findIdByName('members');
 
     for (let user of users) {
       let usergroups  = user.usergroups;
@@ -118,7 +117,7 @@ module.exports = function (N, apiPath) {
 
       usergroups.push(grp_members);
 
-      yield N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
+      await N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
       locals.upgraded[user._id] = true;
     }
   });
@@ -126,8 +125,8 @@ module.exports = function (N, apiPath) {
 
   // `just_registered` -> `novices` (1 day after registration)
   // `just_registered` -> `banned` (1 day after registration)
-  N.wire.on(apiPath, function* upgrade_just_registered(locals) {
-    let grp_just_registered = yield N.models.users.UserGroup.findIdByName('just_registered');
+  N.wire.on(apiPath, async function upgrade_just_registered(locals) {
+    let grp_just_registered = await N.models.users.UserGroup.findIdByName('just_registered');
 
     let query = N.models.users.User.find()
                     .where('usergroups').equals(grp_just_registered)
@@ -135,17 +134,17 @@ module.exports = function (N, apiPath) {
 
     if (locals.user_id) query = query.where('_id').equals(locals.user_id);
 
-    let users = yield query.lean(true);
+    let users = await query.lean(true);
 
     if (!users.length) return;
 
-    let grp_novices = yield N.models.users.UserGroup.findIdByName('novices');
-    let grp_banned  = yield N.models.users.UserGroup.findIdByName('banned');
+    let grp_novices = await N.models.users.UserGroup.findIdByName('novices');
+    let grp_banned  = await N.models.users.UserGroup.findIdByName('banned');
 
     for (let user of users) {
       let usergroups = user.usergroups;
 
-      let target_usergroup = (yield is_user_banned(user)) ? grp_banned : grp_novices;
+      let target_usergroup = (await is_user_banned(user)) ? grp_banned : grp_novices;
 
       // remove old group, and make sure new group isn't already present
       usergroups = user.usergroups.filter(group =>
@@ -153,7 +152,7 @@ module.exports = function (N, apiPath) {
 
       usergroups.push(target_usergroup);
 
-      yield N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
+      await N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
       locals.upgraded[user._id] = true;
     }
   });
@@ -165,9 +164,9 @@ module.exports = function (N, apiPath) {
   // and `incomplete_profile` is group was added since as an intermediate group,
   // e.g. during unfreezing.
   //
-  N.wire.on(apiPath, function* upgrade_incomplete_profile(locals) {
-    let grp_incomplete_profile = yield N.models.users.UserGroup.findIdByName('incomplete_profile');
-    let grp_vb_imported        = yield N.models.users.UserGroup.findIdByName('vb_imported');
+  N.wire.on(apiPath, async function upgrade_incomplete_profile(locals) {
+    let grp_incomplete_profile = await N.models.users.UserGroup.findIdByName('incomplete_profile');
+    let grp_vb_imported        = await N.models.users.UserGroup.findIdByName('vb_imported');
 
     let query = N.models.users.User.find()
                     .where('usergroups').in([ grp_incomplete_profile, grp_vb_imported ])
@@ -175,11 +174,11 @@ module.exports = function (N, apiPath) {
 
     if (locals.user_id) query = query.where('_id').equals(locals.user_id);
 
-    let users = yield query.lean(true);
+    let users = await query.lean(true);
 
     if (!users.length) return;
 
-    let just_registered = yield N.models.users.UserGroup.findIdByName('just_registered');
+    let just_registered = await N.models.users.UserGroup.findIdByName('just_registered');
 
     for (let user of users) {
       // remove old group, and make sure new group isn't already present
@@ -188,7 +187,7 @@ module.exports = function (N, apiPath) {
 
       usergroups.push(just_registered);
 
-      yield N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
+      await N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
       locals.upgraded[user._id] = true;
     }
   });
@@ -212,14 +211,14 @@ module.exports = function (N, apiPath) {
   // This rule applies if user have just submitted a profile change,
   // so we need to verify if data is valid.
   //
-  N.wire.on(apiPath, function* validate_profile(locals) {
+  N.wire.on(apiPath, async function validate_profile(locals) {
     // Only apply this rule when we're triggering update for a single user,
     // not for a mass-upgrade triggered by cron task.
     //
     if (!locals.user_id) return;
 
-    let grp_incomplete_profile = yield N.models.users.UserGroup.findIdByName('incomplete_profile');
-    let grp_vb_imported        = yield N.models.users.UserGroup.findIdByName('vb_imported');
+    let grp_incomplete_profile = await N.models.users.UserGroup.findIdByName('incomplete_profile');
+    let grp_vb_imported        = await N.models.users.UserGroup.findIdByName('vb_imported');
 
     let query = N.models.users.User.find()
                     .where('usergroups').in([ grp_incomplete_profile, grp_vb_imported ])
@@ -231,7 +230,7 @@ module.exports = function (N, apiPath) {
 
     if (locals.user_id) query = query.where('_id').equals(locals.user_id);
 
-    let users = yield query.lean(true);
+    let users = await query.lean(true);
 
     if (!users.length) return;
 
@@ -258,9 +257,9 @@ module.exports = function (N, apiPath) {
       let new_group;
 
       if (valid) {
-        new_group = yield N.models.users.UserGroup.findIdByName('just_registered');
+        new_group = await N.models.users.UserGroup.findIdByName('just_registered');
       } else {
-        new_group = yield N.models.users.UserGroup.findIdByName('che');
+        new_group = await N.models.users.UserGroup.findIdByName('che');
       }
 
       // remove old group, and make sure new group isn't already present
@@ -273,14 +272,14 @@ module.exports = function (N, apiPath) {
 
       if (valid) update.$set.incomplete_profile = false;
 
-      yield N.models.users.User.update({ _id: user._id }, update);
+      await N.models.users.User.update({ _id: user._id }, update);
       locals.upgraded[user._id] = true;
     }
   });
 
 
   // {none} -> `incomplete_profile`
-  N.wire.on(apiPath, function* upgrade_add_initial_usergroup(locals) {
+  N.wire.on(apiPath, async function upgrade_add_initial_usergroup(locals) {
     // Only apply this rule when we're triggering update for a single user,
     // e.g. during an un-freeze.
     //
@@ -288,12 +287,12 @@ module.exports = function (N, apiPath) {
     //
     if (!locals.user_id) return;
 
-    let user = yield N.models.users.User.findById(locals.user_id).lean(false);
+    let user = await N.models.users.User.findById(locals.user_id).lean(false);
 
     if (!user.usergroups.length) {
-      user.usergroups = [ yield N.models.users.UserGroup.findIdByName('incomplete_profile') ];
+      user.usergroups = [ await N.models.users.UserGroup.findIdByName('incomplete_profile') ];
 
-      yield user.save();
+      await user.save();
       locals.upgraded[user._id] = true;
     }
   });
@@ -301,7 +300,7 @@ module.exports = function (N, apiPath) {
 
   // Repeat upgrades in a loop for individual users until no upgrades are possible
   //
-  N.wire.after(apiPath, { priority: 100 }, function* group_upgrade_repeat(locals) {
+  N.wire.after(apiPath, { priority: 100 }, async function group_upgrade_repeat(locals) {
     // do not restart this method if we're already inside a loop
     if (locals.no_nesting) return;
 
@@ -313,7 +312,7 @@ module.exports = function (N, apiPath) {
           no_nesting: true
         };
 
-        yield N.wire.emit(apiPath, subcall_locals);
+        await N.wire.emit(apiPath, subcall_locals);
 
         if (Object.keys(subcall_locals.upgraded).length === 0) break;
 

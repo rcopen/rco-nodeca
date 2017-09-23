@@ -4,7 +4,6 @@
 
 
 const assert  = require('assert');
-const Promise = require('bluebird');
 
 
 describe('Additional shorteners', function () {
@@ -15,11 +14,11 @@ describe('Additional shorteners', function () {
 
 
   /* eslint-disable max-len */
-  it('Unshort aliexpress', Promise.coroutine(function* () {
+  it('Unshort aliexpress', async function () {
     let url = 'http://ali.pub/y9fu8';
     let data = { url, types: [ 'inline' ] };
 
-    yield TEST.N.wire.emit('internal:common.embed', data);
+    await TEST.N.wire.emit('internal:common.embed', data);
 
     assert.strictEqual(
       data.canonical,
@@ -29,13 +28,13 @@ describe('Additional shorteners', function () {
     url = 'http://s.aliexpress.com/ZjIRFZnQ';
     data = { url, types: [ 'inline' ] };
 
-    yield TEST.N.wire.emit('internal:common.embed', data);
+    await TEST.N.wire.emit('internal:common.embed', data);
 
     assert.strictEqual(
       data.canonical,
       'http://www.aliexpress.com/item/32744783165/32744783165.html'
     );
-  }));
+  });
 
 
   it('Unshort banggood.app.link', function () {

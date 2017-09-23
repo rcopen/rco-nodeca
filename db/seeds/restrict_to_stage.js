@@ -3,10 +3,8 @@
 
 'use strict';
 
-const Promise = require('bluebird');
 
-
-module.exports = Promise.coroutine(function* (N) {
+module.exports = async function (N) {
 
   // Disable email notifications
   //
@@ -14,10 +12,10 @@ module.exports = Promise.coroutine(function* (N) {
 
   if (!usergroupStore) throw new Error('Settings store `usergroup` is not registered.');
 
-  let usergroups = yield N.models.users.UserGroup.find().lean(true);
+  let usergroups = await N.models.users.UserGroup.find().lean(true);
 
   for (let usergroup of usergroups) {
-    yield usergroupStore.set({
+    await usergroupStore.set({
       can_receive_email: { value: false, force: true }
     }, { usergroup_id: usergroup._id });
   }
@@ -28,5 +26,5 @@ module.exports = Promise.coroutine(function* (N) {
 
   if (!globalStore) throw new Error('Settings store `global` is not registered.');
 
-  yield globalStore.set({ validate_email: { value: false } });
-});
+  await globalStore.set({ validate_email: { value: false } });
+};

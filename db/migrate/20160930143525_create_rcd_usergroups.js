@@ -1,10 +1,7 @@
 'use strict';
 
 
-const Promise = require('bluebird');
-
-
-exports.up = Promise.coroutine(function* (N) {
+exports.up = async function (N) {
   let usergroups = [
     { name: 'incomplete_profile' },
     { name: 'just_registered' },
@@ -23,7 +20,7 @@ exports.up = Promise.coroutine(function* (N) {
     });
 
     try {
-      yield usergroup.save();
+      await usergroup.save();
     } catch (err) {
       //
       // Those usergroups may already be created by nodeca.vbconvert,
@@ -38,10 +35,10 @@ exports.up = Promise.coroutine(function* (N) {
   for (let config of usergroups) {
     if (!config.parent) continue;
 
-    let usergroup = yield N.models.users.UserGroup.findIdByName(config.name);
-    let parent    = yield N.models.users.UserGroup.findIdByName(config.parent);
+    let usergroup = await N.models.users.UserGroup.findIdByName(config.name);
+    let parent    = await N.models.users.UserGroup.findIdByName(config.parent);
 
-    yield N.models.users.UserGroup.update(
+    await N.models.users.UserGroup.update(
       { _id: usergroup },
       { $set: { parent_group: parent } }
     );
@@ -55,9 +52,9 @@ exports.up = Promise.coroutine(function* (N) {
   // add usergroup settings for moderators
   // (in addition to inherited from members)
 
-  let grp_moderators = yield N.models.users.UserGroup.findIdByName('moderators');
+  let grp_moderators = await N.models.users.UserGroup.findIdByName('moderators');
 
-  yield usergroupStore.set({
+  await usergroupStore.set({
     can_see_infractions:           { value: true },
     cannot_receive_infractions:    { value: true },
     cannot_be_ignored:             { value: true },
@@ -67,18 +64,18 @@ exports.up = Promise.coroutine(function* (N) {
 
   // add usergroup settings for incomplete_profile group
 
-  let grp_incomplete_profile = yield N.models.users.UserGroup.findIdByName('incomplete_profile');
+  let grp_incomplete_profile = await N.models.users.UserGroup.findIdByName('incomplete_profile');
 
-  yield usergroupStore.set({
+  await usergroupStore.set({
     can_edit_profile:  { value: true },
     can_receive_email: { value: true }
   }, { usergroup_id: grp_incomplete_profile });
 
   // add usergroup settings for vb_imported group
 
-  let grp_vb_imported = yield N.models.users.UserGroup.findIdByName('vb_imported');
+  let grp_vb_imported = await N.models.users.UserGroup.findIdByName('vb_imported');
 
-  yield usergroupStore.set({
+  await usergroupStore.set({
     can_edit_profile:  { value: true },
     can_receive_email: { value: true },
     can_use_dialogs:   { value: true }
@@ -86,27 +83,27 @@ exports.up = Promise.coroutine(function* (N) {
 
   // add usergroup settings for just_registered group
 
-  let grp_just_registered = yield N.models.users.UserGroup.findIdByName('just_registered');
+  let grp_just_registered = await N.models.users.UserGroup.findIdByName('just_registered');
 
-  yield usergroupStore.set({
+  await usergroupStore.set({
     can_edit_profile:  { value: true },
     can_receive_email: { value: true }
   }, { usergroup_id: grp_just_registered });
 
   // add usergroup settings for che group
 
-  let grp_che = yield N.models.users.UserGroup.findIdByName('che');
+  let grp_che = await N.models.users.UserGroup.findIdByName('che');
 
-  yield usergroupStore.set({
+  await usergroupStore.set({
     can_edit_profile:  { value: true },
     can_receive_email: { value: true }
   }, { usergroup_id: grp_che });
 
   // add usergroup settings for losers group
 
-  let grp_losers = yield N.models.users.UserGroup.findIdByName('losers');
+  let grp_losers = await N.models.users.UserGroup.findIdByName('losers');
 
-  yield usergroupStore.set({
+  await usergroupStore.set({
     can_edit_profile:  { value: true },
     can_receive_email: { value: true }
   }, { usergroup_id: grp_losers });
@@ -119,5 +116,5 @@ exports.up = Promise.coroutine(function* (N) {
 
   if (!store) throw 'Settings store `global` is not registered.';
 
-  yield store.set({ registered_user_group: { value: grp_incomplete_profile.toString() } });
-});
+  await store.set({ registered_user_group: { value: grp_incomplete_profile.toString() } });
+};

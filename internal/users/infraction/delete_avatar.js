@@ -5,15 +5,15 @@
 
 module.exports = function (N) {
 
-  N.wire.on('internal:users.infraction.add', function* delete_avatar_after_infraction(infraction) {
+  N.wire.on('internal:users.infraction.add', async function delete_avatar_after_infraction(infraction) {
     if (infraction.type !== 'bad_profile_image') return;
 
-    let user = yield N.models.users.User.findById(infraction.for);
+    let user = await N.models.users.User.findById(infraction.for);
 
     if (!user || !user.avatar_id) return;
 
-    yield N.models.users.User.update({ _id: user._id }, { $unset: { avatar_id: null } });
+    await N.models.users.User.update({ _id: user._id }, { $unset: { avatar_id: null } });
 
-    yield N.models.core.File.remove(user.avatar_id, true);
+    await N.models.core.File.remove(user.avatar_id, true);
   });
 };
