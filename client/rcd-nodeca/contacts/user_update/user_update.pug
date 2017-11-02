@@ -17,40 +17,40 @@
 
     form.mb-4(data-on-submit='rcd-nodeca.contacts.user_update:submit')
       // ko with: firstname
-      .form-group(data-bind='css: { "has-danger": error }')
+      .form-group
         label(for='contact-form-firstname')= self.t('field_firstname')
         input.form-control(
           id='contact-form-firstname'
           name='firstname'
           type='text'
-          data-bind='value: value'
+          data-bind='value: value, css: { "is-invalid": error }'
         )
 
         small.form-text.text-muted= self.t('field_firstname_desc')
       // /ko
 
       // ko with: lastname
-      .form-group(data-bind='css: { "has-danger": error }')
+      .form-group
         label(for='contact-form-lastname')= self.t('field_lastname')
         input.form-control(
           id='contact-form-lastname'
           name='lastname'
           type='text'
-          data-bind='value: value'
+          data-bind='value: value, css: { "is-invalid": error }'
         )
 
         small.form-text.text-muted= self.t('field_lastname_desc')
       // /ko
 
       // ko with: birthday
-      .form-group(data-bind='css: { "has-danger": error }')
+      .form-group
         label(for='contact-form-birthday')= self.t('field_birthday')
         .input-group
           input.form-control(
             id='contact-form-birthday'
             name='birthday'
             type='text',
-            data-bind='value: value',
+            data-bind='value: value, css: { "is-invalid": error }',
             readonly
           )
 

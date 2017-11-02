@@ -19,34 +19,34 @@
 
       if !self.runtime.is_member
         // ko with: name
-        .form-group(data-bind='css: { "has-danger": error }')
+        .form-group
           label(for='contact-form-name')= self.t('field_name')
           input.form-control(
             id='contact-form-name'
             name='name'
             type='text'
-            data-bind='value: value'
+            data-bind='value: value, css: { "is-invalid": error }'
           )
         // /ko
 
         // ko with: email
-        .form-group(data-bind='css: { "has-danger": error }')
+        .form-group
           label(for='contact-form-email')= self.t('field_email')
           input.form-control(
             id='contact-form-email'
             name='email'
             type='email'
-            data-bind='value: value'
+            data-bind='value: value, css: { "is-invalid": error }'
           )
         // /ko
 
       // ko with: message
-      .form-group(data-bind='css: { "has-danger": error }')
+      .form-group
         label(for='contact-form-message')= self.t('field_message')
         textarea.form-control.contact-form-textarea(
           id='contact-form-message'
           name='message'
-          data-bind='value: value'
+          data-bind='value: value, css: { "is-invalid": error }'
         )
       // /ko
 

@@ -17,12 +17,12 @@
 
     form.mb-4(data-on-submit='rcd-nodeca.contacts.mod_appeal:submit')
       // ko with: message
-      .form-group(data-bind='css: { "has-danger": error }')
+      .form-group
         label(for='contact-form-message')= self.t('field_message')
         textarea.form-control.contact-form-textarea(
           id='contact-form-message'
           name='message'
-          data-bind='value: value'
+          data-bind='value: value, css: { "is-invalid": error }'
         )
       // /ko
 

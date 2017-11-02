@@ -17,17 +17,17 @@
 
     form.mb-4(data-on-submit='rcd-nodeca.contacts.nick_change:submit')
       // ko with: nick
-      .form-group(data-bind='css: { "has-danger": error }')
+      .form-group
         label(for='contact-form-nick')= self.t('field_nick')
         input.form-control(
           id='contact-form-nick'
           name='nick'
           type='text'
-          data-bind='value: value'
+          data-bind='value: value, css: { "is-invalid": error }'
         )
 
         // ko if: error
-        .form-control-feedback(data-bind='text: error')
+        .invalid-feedback(data-bind='text: error')
         // /ko
       // /ko
 
