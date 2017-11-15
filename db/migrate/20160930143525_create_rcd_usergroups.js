@@ -55,11 +55,11 @@ exports.up = async function (N) {
   let grp_moderators = await N.models.users.UserGroup.findIdByName('moderators');
 
   await usergroupStore.set({
-    can_see_infractions:           { value: true },
-    cannot_receive_infractions:    { value: true },
-    cannot_be_ignored:             { value: true },
-    users_mod_can_add_infractions: { value: true },
-    forum_show_ignored:            { value: true }
+    can_see_infractions:                   { value: true },
+    cannot_receive_infractions:            { value: true },
+    cannot_be_ignored:                     { value: true },
+    users_mod_can_add_infractions_profile: { value: true },
+    forum_show_ignored:                    { value: true }
   }, { usergroup_id: grp_moderators });
 
   // add usergroup settings for incomplete_profile group
