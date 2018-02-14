@@ -3,5 +3,5 @@
 
 
 google-libphonenumber@^3.0.7:
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.0.9.tgz#1454c352125cc2c3ed5d839c3adc4f8ba80dd640"
+  version "3.0.12"
+  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.0.12.tgz#ec667d3c86e83ced258c6c76f4972bd2aa6c3632"
