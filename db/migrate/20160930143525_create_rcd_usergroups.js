@@ -62,6 +62,14 @@ exports.up = async function (N) {
     forum_show_ignored:                    { value: true }
   }, { usergroup_id: grp_moderators });
 
+  // disable club creation for novices (< 30 days)
+
+  let grp_novices = await N.models.users.UserGroup.findIdByName('novices');
+
+  await usergroupStore.set({
+    clubs_can_create_clubs: { value: false }
+  }, { usergroup_id: grp_novices });
+
   // add usergroup settings for incomplete_profile group
 
   let grp_incomplete_profile = await N.models.users.UserGroup.findIdByName('incomplete_profile');
