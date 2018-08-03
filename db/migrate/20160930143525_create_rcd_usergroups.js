@@ -67,7 +67,8 @@ exports.up = async function (N) {
   let grp_novices = await N.models.users.UserGroup.findIdByName('novices');
 
   await usergroupStore.set({
-    clubs_can_create_clubs: { value: false }
+    clubs_can_create_clubs:  { value: false },
+    market_can_create_items: { value: false }
   }, { usergroup_id: grp_novices });
 
   // add usergroup settings for incomplete_profile group
