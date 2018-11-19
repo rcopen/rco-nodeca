@@ -1,7 +1,7 @@
 'use strict';
 
 
-exports.up = function (N) {
+exports.up = async function (N) {
   let config = [
     {
       title: 'Самолеты',
@@ -19,7 +19,7 @@ exports.up = function (N) {
         'Готовые',
         'Рамы, наборы для сборки',
         'Контроллеры',
-        'Комплектующие для квадракоптеров'
+        'Комплектующие для квадрокоптеров'
       ],
       links: [
         'FPV-оборудование',
@@ -163,5 +163,5 @@ exports.up = function (N) {
     });
   }
 
-  return Promise.all(sections_to_save.map(section => section.save()));
+  for (let section of sections_to_save) await section.save();
 };
