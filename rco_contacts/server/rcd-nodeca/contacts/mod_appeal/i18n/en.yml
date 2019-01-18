@@ -1,0 +1,12 @@
+en-US:
+  exec:
+    email_subject: '#{project_name}: Жалоба на модератора'
+
+    email_text: |
+      Пользователь: #{name}, #{profile}
+
+      Сообщение:
+      ---------------------------
+      #{message}
+
+    err_wrong_captcha: CAPTCHA verification failed, try again.

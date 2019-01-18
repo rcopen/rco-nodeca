@@ -1,0 +1,10 @@
+packages:
+  admin:
+    entries:
+      - server/admin
+
+  users:
+    entries:
+      - client/users
+      - internal/users
+      - server/users

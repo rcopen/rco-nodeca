@@ -1,0 +1,91 @@
+users:
+  infractions:
+    ~override: true
+
+    types:
+      overquoting:
+        points: 1
+        expire_days: 30
+        priority: 10
+      offtopic:
+        points: 2
+        expire_days: 30
+        priority: 20
+      bad_title:
+        points: 3
+        expire_days: 30
+        priority: 30
+      personal_conversation:
+        points: 3
+        expire_days: 30
+        priority: 40
+      wrong_section:
+        points: 3
+        expire_days: 30
+        priority: 50
+      frequent_bump:
+        points: 4
+        expire_days: 30
+        priority: 60
+      spam:
+        points: 4
+        expire_days: 30
+        priority: 70
+      no_price:
+        points: 4
+        expire_days: 30
+        priority: 80
+      duplicate_topic:
+        points: 4
+        expire_days: 30
+        priority: 100
+      warez:
+        points: 30
+        expire_days: 30
+        priority: 100
+
+      bad_city:
+        points: 4
+        expire_days: 30
+        priority: 1010
+        category_key: profile
+      bad_profile_image:
+        points: 5
+        expire_days: 30
+        priority: 1020
+        category_key: profile
+      bad_profile_data:
+        points: 0
+        expire_days: 30
+        priority: 1030
+        category_key: profile
+      multiple_accounts:
+        points: 1000
+        expire_days: -1
+        priority: 1040
+        category_key: profile
+
+    penalties:
+      -
+        points: 7
+        action: to_violators
+        action_data: { days: 7 }
+      -
+        points: 14
+        action: to_violators
+        action_data: { days: 14 }
+      -
+        points: 30
+        action: to_violators
+        action_data: { days: 30 }
+      -
+        points: 60
+        action: to_violators
+        action_data: { days: 60 }
+      -
+        points: 90
+        action: to_violators
+        action_data: { days: 90 }
+      -
+        points: 100
+        action: to_banned

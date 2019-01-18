@@ -1,0 +1,24 @@
+en-US:
+  exec:
+    email_subject: '#{project_name}: Вопрос по рекламе'
+
+    email_text_guest: |
+      Кто:   #{name}
+      Email: #{email}
+
+      Для сайта: #{url}
+
+      Сообщение:
+      ---------------------------
+      #{message}
+
+    email_text_member: |
+      Пользователь: #{name}, #{profile}
+
+      Для сайта: #{url}
+
+      Сообщение:
+      ---------------------------
+      #{message}
+
+    err_wrong_captcha: CAPTCHA verification failed, try again.

@@ -1,8 +1,0 @@
-en-US:
-  title: Подтвердить новые данные профиля
-  mod_notes: У этого пользователя есть замечания (#{count})
-  button_save: Save
-  saved: Saved
-  first_name: First name
-  last_name: Last name
-  birthday: Birthday

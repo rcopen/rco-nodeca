@@ -1,0 +1,12 @@
+announces:
+  incomplete_profile:
+    usergroup: incomplete_profile
+  vb_imported:
+    usergroup: vb_imported
+  just_registered:
+    usergroup: just_registered
+    hide_days: 30 # closed announce reappears in 30 days
+  bad_profile_info:
+    usergroup: che
+  banned:
+    usergroup: banned

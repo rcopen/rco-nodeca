@@ -1,0 +1,2 @@
+cron:
+  group_upgrade: 20 */10 * * * * # every 10 minutes

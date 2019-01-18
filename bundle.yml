@@ -2,32 +2,28 @@ bundles:
   frontend:
     - rcd-nodeca
 
-
 packages:
-  admin:
-    entries:
-      - client/admin
-      - server/admin
-
-  common:
-    entries:
-      - client/common
-      - server/common
-
-  forum:
-    entries:
-      - client/forum
-
   users:
     entries:
-      - client/users
       - internal/users
-      - server/users
 
   rcd-nodeca:
     depends:
       - common
 
-    entries:
-      - client/rcd-nodeca
-      - server/rcd-nodeca
+modules:
+  - rco_account_freeze
+  - rco_account_purge
+  - rco_ads
+  - rco_announces
+  - rco_contacts
+  - rco_db_setup
+  - rco_design
+  - rco_dev_warning
+  - rco_extra_profile_fields
+  - rco_infractions
+  - rco_links_cleanup
+  - rco_links_unshort
+  - rco_permissions_workflow
+  - rco_rules
+  - rco_search

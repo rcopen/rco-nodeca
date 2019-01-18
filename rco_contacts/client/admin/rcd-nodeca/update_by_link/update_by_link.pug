@@ -1,0 +1,29 @@
+#content
+  != self.partial('@admin.core.blocks.sidebar_menu')
+
+  .main
+    != self.partial('@admin.core.blocks.breadcrumbs')
+
+    .page-head
+      h1.page-head__title(itemprop='name')= self.t('title')
+
+    form(data-on-submit='admin.rcd-nodeca.update_by_link:submit', data-user-hid=self.user.hid)
+      h5
+        a(
+          href=self.link_to('admin.users.members.edit', { user_hid: self.user.hid })
+        )= self.user.name
+      p.small.form-text.text-muted= self.usergroups.map(group => group.name).join(', ')
+
+      if self.mod_notes_count
+        .alert.alert-warning
+          a(href=self.link_to('users.mod_notes', { user_hid: self.user.hid }), target='_blank')
+            = self.t('mod_notes', { count: self.mod_notes_count })
+
+      ul
+        each item in self.changes
+          li(title=self.t(item.name))
+            input(type='hidden', name=item.name, value=item.new_value)
+            = item.old_value + ' → ' + item.new_value
+
+      button.btn.btn-primary(type='submit')
+        = self.t('button_save')

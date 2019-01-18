@@ -1,0 +1,12 @@
+en-US:
+  exec:
+    email_subject: '#{project_name}: Исправление данных профиля — #{username}'
+
+    email_text: |
+      Пользователь: #{name}, #{profile}
+
+      Имя:           #{firstname}
+      Фамилия:       #{lastname}
+      Дата рождения: #{birthday}
+
+      #{link}

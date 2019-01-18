@@ -1,0 +1,3 @@
+ - full rules page
+ - link to rules from register form
+ - confirmation of avatar requirements on update

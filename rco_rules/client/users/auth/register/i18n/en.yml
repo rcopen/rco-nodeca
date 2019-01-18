@@ -1,0 +1,4 @@
+en-US:
+  show_rules_notice:
+    text: |
+      By registering you agree to the <a href="#{link}">rules of this website</a>.

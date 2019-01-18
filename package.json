@@ -26,6 +26,6 @@
     "unsafe-perm":true
   },
   "scripts": {
-    "install": "node support/install"
+    "install": "node rco_search/support/install"
   }
 }

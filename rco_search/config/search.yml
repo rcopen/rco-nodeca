@@ -1,0 +1,35 @@
+search:
+  searchd:
+    log: searchd.log
+    # query_log
+    # query_log_min_msec: 100
+    subtree_docs_cache: 10M
+    subtree_hits_cache: 16M
+    qcache_max_bytes: 16777216
+    qcache_thresh_msec: 1000
+    expansion_limit: 16
+    # rt_merge_iops: 40
+    # rt_merge_maxiosize: 1M
+    attr_flush_period: 900
+    queue_max_length: 1000
+    binlog_max_log_size: 512M
+
+  common:
+    lemmatizer_base: npm:rcd-nodeca/rco_search/sphinx_dicts/lemmatizer
+
+  indexes:
+    _default_base:
+      # try *_all
+      morphology: lemmatize_en_all, lemmatize_ru_all, lemmatize_de_all
+      stopwords: npm:rcd-nodeca/rco_search/sphinx_dicts/stopwords.txt
+      #stopwords_unstemmed: 1
+      # exceptions
+      charset_table: 0..9, A..Z->a..z, _, a..z, U+410..U+42F->U+430..U+44F, U+430..U+44F, U+401->U+0435, U+451->U+0435
+      ignore_chars: U+AD
+      #min_stemming_len: 4
+      #min_word_len: 1
+      blend_chars: -, +, U+23, ., @, &->+
+      blend_mode: trim_none, trim_head, trim_tail, skip_pure
+
+    'forum_posts : _default_content':
+      rt_mem_limit: 512M

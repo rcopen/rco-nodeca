@@ -1,8 +1,0 @@
-menus:
-  common:
-    footer:
-      rules:
-        to: common.rules
-
-      contacts:
-        to: rcd-nodeca.contacts

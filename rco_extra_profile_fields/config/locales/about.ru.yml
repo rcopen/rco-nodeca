@@ -1,0 +1,12 @@
+i18n:
+  ru-RU:
+    users:
+      about:
+        first_name: Имя
+        last_name: Фамилия
+
+    admin:
+      users:
+        about:
+          first_name: Имя
+          last_name: Фамилия
