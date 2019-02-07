@@ -20,7 +20,7 @@
     ]
   },
   "dependencies": {
-    "google-libphonenumber": "^3.0.7"
+    "google-libphonenumber": "^3.2.2"
   },
   "config": {
     "unsafe-perm":true
