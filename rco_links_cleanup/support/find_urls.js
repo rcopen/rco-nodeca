@@ -52,20 +52,16 @@ mongoose.Promise = Promise;
 
 async function search() {
   const mongoose_options = {
-    server: {
-      poolSize: 10,
-      socketOptions: {
-        connectTimeoutMS: 10 * 60 * 1000,
-        keepAlive: 1
-      }
-    },
-    replset: {
-      poolSize: 10,
-      socketOptions: {
-        connectTimeoutMS: 10 * 60 * 1000,
-        keepAlive: 1
-      }
-    }
+    promiseLibrary: require('bluebird'),
+    poolSize: 10,
+    connectTimeoutMS: 30000,
+    keepAlive: 1,
+
+    // fix deprecation warnings appearing in mongodb driver,
+    // see https://mongoosejs.com/docs/deprecations.html for details
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true
   };
 
   await mongoose.connect('mongodb://localhost/' + args.db, mongoose_options);
