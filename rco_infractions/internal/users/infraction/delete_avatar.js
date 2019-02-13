@@ -12,7 +12,7 @@ module.exports = function (N) {
 
     if (!user || !user.avatar_id) return;
 
-    await N.models.users.User.update({ _id: user._id }, { $unset: { avatar_id: null } });
+    await N.models.users.User.updateOne({ _id: user._id }, { $unset: { avatar_id: null } });
 
     await N.models.core.File.remove(user.avatar_id, true);
   });

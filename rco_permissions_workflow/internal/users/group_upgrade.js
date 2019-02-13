@@ -117,7 +117,7 @@ module.exports = function (N, apiPath) {
 
       usergroups.push(grp_members);
 
-      await N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
+      await N.models.users.User.updateOne({ _id: user._id }, { $set: { usergroups } });
       locals.upgraded[user._id] = true;
     }
   });
@@ -152,7 +152,7 @@ module.exports = function (N, apiPath) {
 
       usergroups.push(target_usergroup);
 
-      await N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
+      await N.models.users.User.updateOne({ _id: user._id }, { $set: { usergroups } });
       locals.upgraded[user._id] = true;
     }
   });
@@ -187,7 +187,7 @@ module.exports = function (N, apiPath) {
 
       usergroups.push(just_registered);
 
-      await N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
+      await N.models.users.User.updateOne({ _id: user._id }, { $set: { usergroups } });
       locals.upgraded[user._id] = true;
     }
   });
@@ -272,7 +272,7 @@ module.exports = function (N, apiPath) {
 
       if (valid) update.$set.incomplete_profile = false;
 
-      await N.models.users.User.update({ _id: user._id }, update);
+      await N.models.users.User.updateOne({ _id: user._id }, update);
       locals.upgraded[user._id] = true;
     }
   });

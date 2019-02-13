@@ -38,7 +38,7 @@ exports.up = async function (N) {
     let usergroup = await N.models.users.UserGroup.findIdByName(config.name);
     let parent    = await N.models.users.UserGroup.findIdByName(config.parent);
 
-    await N.models.users.UserGroup.update(
+    await N.models.users.UserGroup.updateOne(
       { _id: usergroup },
       { $set: { parent_group: parent } }
     );

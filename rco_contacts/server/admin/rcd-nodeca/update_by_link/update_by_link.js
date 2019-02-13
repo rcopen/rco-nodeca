@@ -81,7 +81,7 @@ module.exports = function (N, apiPath) {
     // fill moderator's notes count
     env.res.mod_notes_count = await N.models.users.ModeratorNote.find()
                                         .where('to').equals(env.data.user._id)
-                                        .count();
+                                        .countDocuments();
 
     // fill usergroups
     env.res.usergroups = await N.models.users.UserGroup.find()

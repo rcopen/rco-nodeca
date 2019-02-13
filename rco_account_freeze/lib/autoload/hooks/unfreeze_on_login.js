@@ -19,7 +19,7 @@ module.exports = function (N) {
 
       usergroups.push(new_group);
 
-      await N.models.users.User.update({ _id: env.data.user._id }, { $set: { usergroups } });
+      await N.models.users.User.updateOne({ _id: env.data.user._id }, { $set: { usergroups } });
     }
   });
 };

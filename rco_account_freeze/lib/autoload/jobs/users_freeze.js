@@ -41,7 +41,7 @@ module.exports = function (N) {
 
             usergroups.push(grp_frozen);
 
-            await N.models.users.User.update({ _id: user._id }, { $set: { usergroups } });
+            await N.models.users.User.updateOne({ _id: user._id }, { $set: { usergroups } });
           }
 
         } catch (err) {

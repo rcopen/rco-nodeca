@@ -12,6 +12,6 @@ module.exports = function (N) {
 
     if (!che_group_id) throw new Error('Cheburate: Cannot find usergroup by short name "che"');
 
-    await N.models.users.User.update({ _id: infraction.for }, { usergroups: [ che_group_id ] });
+    await N.models.users.User.updateOne({ _id: infraction.for }, { usergroups: [ che_group_id ] });
   });
 };
