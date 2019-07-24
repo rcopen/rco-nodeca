@@ -3,10 +3,6 @@ users:
     ~override: true
 
     types:
-      overquoting:
-        points: 1
-        expire_days: 30
-        priority: 10
       offtopic:
         points: 2
         expire_days: 30
@@ -31,10 +27,6 @@ users:
         points: 4
         expire_days: 30
         priority: 70
-      no_price:
-        points: 4
-        expire_days: 30
-        priority: 80
       duplicate_topic:
         points: 4
         expire_days: 30
@@ -43,12 +35,6 @@ users:
         points: 30
         expire_days: 30
         priority: 100
-
-      bad_city:
-        points: 4
-        expire_days: 30
-        priority: 1010
-        category_key: profile
       bad_profile_image:
         points: 5
         expire_days: 30
