@@ -1,0 +1,10 @@
+.cookie-confirm.alert.alert-primary.fixed-bottom.fade.show
+  .row
+    .col
+      != self.t('text')
+
+    .col-auto.align-self-center
+      button.btn.btn-primary(
+        data-on-click='common.blocks.cookie_confirm:accept'
+        data-dismiss='alert'
+      )= self.t('accept')
