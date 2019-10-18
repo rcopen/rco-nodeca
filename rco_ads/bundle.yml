@@ -1,8 +1,4 @@
 packages:
-  common:
-    entries:
-      - client/common
-
   forum:
     entries:
       - client/forum

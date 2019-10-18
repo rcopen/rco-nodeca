@@ -101,13 +101,8 @@ N.wire.once('navigate.done', function init_scroll_tracker() {
 });
 
 
-N.wire.on('navigate.done', function append_ads_on_load() {
+N.wire.on('navigate.done:forum.topic', function append_ads_on_load() {
   append_ads($(document));
-});
-
-
-N.wire.on('navigate.update.done', function append_ads_on_update(data) {
-  append_ads(data.$);
 });
 
 
