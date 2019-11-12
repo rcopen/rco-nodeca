@@ -3,10 +3,6 @@ bundles:
     - rcd-nodeca
 
 packages:
-  users:
-    entries:
-      - internal/users
-
   rcd-nodeca:
     depends:
       - common
@@ -23,7 +19,7 @@ modules:
   - rco_dev_warning
   - rco_extra_profile_fields
   - rco_infractions
-  - rco_links_cleanup
+  - rco_links_rewrite
   - rco_links_unshort
   - rco_permissions_workflow
   - rco_rules

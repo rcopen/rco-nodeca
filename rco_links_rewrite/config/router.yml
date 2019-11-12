@@ -1,0 +1,4 @@
+router:
+  http.get:
+    common.redirect:
+      "/r": ~
