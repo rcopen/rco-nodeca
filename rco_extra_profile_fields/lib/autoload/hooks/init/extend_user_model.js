@@ -31,7 +31,7 @@ module.exports = function (N) {
 
       // flag whether or not user filled out his name and birthday;
       // used to determine which group frozen user can be moved to
-      incomplete_profile: { type: Boolean, 'default': true }
+      incomplete_profile: { type: Boolean, default: true }
     });
 
     User.index({ first_name_lc: 1 });
