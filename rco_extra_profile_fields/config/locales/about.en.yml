@@ -5,8 +5,8 @@ i18n:
         skype: Skype
         whatsapp: WhatsApp
         telegram: Telegram
-        jabber: Jabber
-        icq: ICQ
+        #jabber: Jabber
+        #icq: ICQ
         first_name: First name
         last_name: Last name
 
@@ -16,7 +16,7 @@ i18n:
           skype: Skype
           whatsapp: WhatsApp
           telegram: Telegram
-          jabber: Jabber
-          icq: ICQ
+          #jabber: Jabber
+          #icq: ICQ
           first_name: First name
           last_name: Last name
