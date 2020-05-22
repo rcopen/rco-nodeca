@@ -62,6 +62,6 @@ module.exports = function (N, apiPath) {
   // disallow redirect page from being indexed,
   // see https://webmasters.googleblog.com/2009/01/open-redirect-urls-is-your-site-being.html
   N.wire.after('server:common.robots', function robots_disallow_redirect(env) {
-    env.body += 'Disallow: ' + N.router.linkTo('common.redirect') + '\n';
+    env.body += 'Disallow: /r\n';
   });
 };
