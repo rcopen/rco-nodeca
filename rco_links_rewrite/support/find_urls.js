@@ -14,38 +14,26 @@ const URL      = require('url');
 
 let parser = new argparse.ArgumentParser();
 
-parser.addArgument(
-  [ '-d', '--db' ],
-  {
-    help: 'database name',
-    defaultValue: 'nodeca'
-  }
-);
+parser.add_argument('-d', '--db', {
+  help: 'database name',
+  default: 'nodeca'
+});
 
-parser.addArgument(
-  [ '-c', '--cutoff' ],
-  {
-    help: 'cutoff (days)',
-    type: 'int'
-  }
-);
+parser.add_argument('-c', '--cutoff', {
+  help: 'cutoff (days)',
+  type: 'int'
+});
 
-parser.addArgument(
-  [ '-l', '--long' ],
-  {
-    help: 'hide short links (without query)',
-    action: 'storeTrue'
-  }
-);
+parser.add_argument('-l', '--long', {
+  help: 'hide short links (without query)',
+  action: 'store_true'
+});
 
-parser.addArgument(
-  'domain',
-  {
-    help: 'domain name'
-  }
-);
+parser.add_argument('domain', {
+  help: 'domain name'
+});
 
-let args = parser.parseArgs();
+let args = parser.parse_args();
 
 
 mongoose.Promise = Promise;
