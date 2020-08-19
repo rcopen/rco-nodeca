@@ -7,8 +7,8 @@
 const _        = require('lodash');
 const argparse = require('argparse');
 const mongoose = require('mongoose');
-const pump     = require('util').promisify(require('pump'));
 const stream   = require('stream');
+const pipeline = require('util').promisify(stream.pipeline);
 const URL      = require('url');
 
 
@@ -67,7 +67,7 @@ async function search() {
     query._id = { $gt: min_objectid };
   }
 
-  await pump(
+  await pipeline(
     Post.find(query).lean(true).cursor(),
 
     new stream.Writable({
