@@ -7,18 +7,6 @@
   ],
   "license": "MIT",
   "repository": "rcdesign/rcd-nodeca",
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "@babel/preset-env"
-          ]
-        }
-      ]
-    ]
-  },
   "dependencies": {
     "google-libphonenumber": "^3.2.2"
   },
