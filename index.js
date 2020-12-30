@@ -1,5 +1,5 @@
 'use strict';
 
 exports.root = __dirname;
-exports.name = 'rcd-nodeca';
+exports.name = 'rco-nodeca';
 exports.init = function () {};

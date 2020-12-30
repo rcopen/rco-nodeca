@@ -13,7 +13,7 @@ module.exports = function (N) {
   var root = path.join(__dirname, '../../../../static');
 
 
-  N.validate('server_bin:rcd-nodeca.static', {
+  N.validate('server_bin:rco-nodeca.static', {
     // DON'T validate unknown params - those can exists,
     // if someone requests '/myfile.txt?xxxx' instead of '/myfile.txt/
     additionalProperties: true,
@@ -26,7 +26,7 @@ module.exports = function (N) {
   });
 
 
-  N.wire.on('server_bin:rcd-nodeca.static', async function static_file_send(env) {
+  N.wire.on('server_bin:rco-nodeca.static', async function static_file_send(env) {
     var req = env.origin.req,
         res = env.origin.res;
 

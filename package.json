@@ -1,12 +1,12 @@
 {
-  "name": "rcd-nodeca",
+  "name": "rco-nodeca",
   "description": "RC Design forum configuration for nodeca",
   "version": "0.0.1",
   "keywords": [
     "nodeca"
   ],
   "license": "MIT",
-  "repository": "rcdesign/rcd-nodeca",
+  "repository": "rcopen/rco-nodeca",
   "dependencies": {
     "google-libphonenumber": "^3.2.2"
   },

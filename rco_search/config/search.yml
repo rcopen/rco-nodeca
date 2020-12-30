@@ -15,13 +15,13 @@ search:
     binlog_max_log_size: 512M
 
   common:
-    lemmatizer_base: npm:rcd-nodeca/rco_search/sphinx_dicts/lemmatizer
+    lemmatizer_base: npm:rco-nodeca/rco_search/sphinx_dicts/lemmatizer
 
   indexes:
     _default_base:
       # try *_all
       morphology: lemmatize_en_all, lemmatize_ru_all, lemmatize_de_all
-      stopwords: npm:rcd-nodeca/rco_search/sphinx_dicts/stopwords.txt
+      stopwords: npm:rco-nodeca/rco_search/sphinx_dicts/stopwords.txt
       #stopwords_unstemmed: 1
       # exceptions
       charset_table: 0..9, A..Z->a..z, _, a..z, U+410..U+42F->U+430..U+44F, U+430..U+44F, U+401->U+0435, U+451->U+0435

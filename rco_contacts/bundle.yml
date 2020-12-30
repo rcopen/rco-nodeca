@@ -4,7 +4,7 @@ packages:
       - client/admin
       - server/admin
 
-  rcd-nodeca:
+  rco-nodeca:
     entries:
-      - client/rcd-nodeca
-      - server/rcd-nodeca
+      - client/rco-nodeca
+      - server/rco-nodeca

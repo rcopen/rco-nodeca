@@ -6,7 +6,7 @@
 
 const URL = require('url');
 const $ = require('nodeca.core/lib/parser/cheequery');
-const domains = require('rcd-nodeca/rco_links_rewrite/lib/redirected_domains');
+const domains = require('rco-nodeca/rco_links_rewrite/lib/redirected_domains');
 
 
 module.exports = function (N) {

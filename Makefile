@@ -35,7 +35,7 @@ test-ci:
 		git checkout -b "${TRAVIS_BRANCH}" "origin/${TRAVIS_BRANCH}" || true
 
 	cd ${TMP_PATH} && $(MAKE) deps-ci
-	echo 'applications:\n - rcd-nodeca' > ${TMP_PATH}/config/additional.yml
+	echo 'applications:\n - rco-nodeca' > ${TMP_PATH}/config/additional.yml
 	cd ${TMP_PATH} && NODECA_APP=${NPM_PACKAGE} $(MAKE) test
 	rm -rf ${TMP_PATH}
 

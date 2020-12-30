@@ -1,0 +1,66 @@
+#content
+  != self.partial('@common.blocks.navbar.logo_apps')
+
+  nav.breadcrumbs-container
+    .layout__container.container-fluid
+      !=self.partial('@users.blocks.breadcrumbs')
+
+  .layout__container.container-fluid.space-top
+    != self.partial('@users.blocks.announces')
+
+    // ko ifnot: submitted
+    header.page-head
+      h1.page-head__title= self.head.title
+
+    .alert.alert-warning.pb-0.mb-4
+      != self.t('description')
+
+    form.mb-4(data-on-submit='rco-nodeca.contacts.user_update:submit')
+      // ko with: firstname
+      .form-group
+        label(for='contact-form-firstname')= self.t('field_firstname')
+        input.form-control(
+          id='contact-form-firstname'
+          name='firstname'
+          type='text'
+          data-bind='value: value, css: { "is-invalid": error }'
+        )
+
+        small.form-text.text-muted= self.t('field_firstname_desc')
+      // /ko
+
+      // ko with: lastname
+      .form-group
+        label(for='contact-form-lastname')= self.t('field_lastname')
+        input.form-control(
+          id='contact-form-lastname'
+          name='lastname'
+          type='text'
+          data-bind='value: value, css: { "is-invalid": error }'
+        )
+
+        small.form-text.text-muted= self.t('field_lastname_desc')
+      // /ko
+
+      // ko with: birthday
+      .form-group
+        label(for='contact-form-birthday')= self.t('field_birthday')
+        .input-group
+          input.form-control(
+            id='contact-form-birthday'
+            name='birthday'
+            type='text',
+            data-bind='value: value, css: { "is-invalid": error }',
+            readonly
+          )
+
+        small.form-text.text-muted= self.t('field_birthday_desc')
+      // /ko
+
+      button.btn.btn-primary.mt-3(type='submit')= self.t('submit')
+    // /ko
+
+    .row(style='display: none', data-bind='visible: submitted')
+      .col-md-6.col-sm-8.m-auto
+        .card.card-body
+          = self.t('success')

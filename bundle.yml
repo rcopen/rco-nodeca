@@ -1,9 +1,9 @@
 bundles:
   frontend:
-    - rcd-nodeca
+    - rco-nodeca
 
 packages:
-  rcd-nodeca:
+  rco-nodeca:
     depends:
       - common
 

@@ -1,0 +1,34 @@
+#content
+  != self.partial('@common.blocks.navbar.logo_apps')
+
+  nav.breadcrumbs-container
+    .layout__container.container-fluid
+      !=self.partial('@users.blocks.breadcrumbs')
+
+  .layout__container.container-fluid.contacts
+    != self.partial('@users.blocks.announces')
+
+    header.page-head
+      h1.page-head__title(itemprop='name')= self.t('title')
+
+    ul.contacts__list
+      li.contacts__item
+        a.contacts__link(href=self.link_to('rco-nodeca.contacts.sales'))
+          = self.t('@rco-nodeca.contacts.sales.title')
+
+      li.contacts__item
+        a.contacts__link(href=self.link_to('rco-nodeca.contacts.support'))
+          = self.t('@rco-nodeca.contacts.support.title')
+
+      if self.runtime.is_member
+        //-li.contacts__item
+        //-  a.contacts__link(href=self.link_to('rco-nodeca.contacts.nick_change'))
+        //-    = self.t('@rco-nodeca.contacts.nick_change.title')
+
+        li.contacts__item
+          a.contacts__link(href=self.link_to('rco-nodeca.contacts.user_update'))
+            = self.t('@rco-nodeca.contacts.user_update.title')
+
+        li.contacts__item
+          a.contacts__link(href=self.link_to('rco-nodeca.contacts.mod_appeal'))
+            = self.t('@rco-nodeca.contacts.mod_appeal.title')
