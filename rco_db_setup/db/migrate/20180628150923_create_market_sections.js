@@ -117,7 +117,10 @@ exports.up = async function (N) {
     },
     'Инструмент, станки',
     'Не модельное',
-    'Отдам в хорошие руки'
+    {
+      title: 'Отдам в хорошие руки',
+      allow_wishes: false
+    }
   ];
 
 
@@ -138,6 +141,8 @@ exports.up = async function (N) {
       });
 
       if (parent) section.parent = parent._id;
+      if ('allow_offers' in section_desc) section.allow_offers = section_desc.allow_offers;
+      if ('allow_wishes' in section_desc) section.allow_wishes = section_desc.allow_wishes;
 
       if (!sections_by_name[section_desc.title]) {
         sections_by_name[section_desc.title] = section;
