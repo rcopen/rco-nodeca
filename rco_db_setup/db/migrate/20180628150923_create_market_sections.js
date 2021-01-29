@@ -5,9 +5,16 @@ exports.up = async function (N) {
   let config = [
     {
       title: 'Самолеты',
+      hid: 1,
       children: [
-        'Готовые самолеты и наборы',
-        'Комплектующие для самолетов'
+        {
+          title: 'Готовые самолеты и наборы',
+          hid: 12
+        },
+        {
+          title: 'Комплектующие для самолетов',
+          hid: 13
+        }
       ],
       links: [
         'Комплектующие'
@@ -15,11 +22,24 @@ exports.up = async function (N) {
     },
     {
       title: 'Квадрокоптеры и другие',
+      hid: 2,
       children: [
-        'Готовые',
-        'Рамы, наборы для сборки',
-        'Контроллеры',
-        'Комплектующие для квадрокоптеров'
+        {
+          title: 'Готовые',
+          hid: 14
+        },
+        {
+          title: 'Рамы, наборы для сборки',
+          hid: 15
+        },
+        {
+          title: 'Контроллеры',
+          hid: 16
+        },
+        {
+          title: 'Комплектующие для квадрокоптеров',
+          hid: 17
+        }
       ],
       links: [
         'FPV-оборудование',
@@ -28,11 +48,24 @@ exports.up = async function (N) {
     },
     {
       title: 'Вертолеты',
+      hid: 3,
       children: [
-        'Микровертолеты (весом < 400г)',
-        'Электрические вертолеты',
-        'Вертолеты с ДВС',
-        'Комплектующие для вертолетов'
+        {
+          title: 'Микровертолеты (весом < 400г)',
+          hid: 18
+        },
+        {
+          title: 'Электрические вертолеты',
+          hid: 19
+        },
+        {
+          title: 'Вертолеты с ДВС',
+          hid: 20
+        },
+        {
+          title: 'Комплектующие для вертолетов',
+          hid: 21
+        }
       ],
       links: [
         'Комплектующие'
@@ -40,19 +73,48 @@ exports.up = async function (N) {
     },
     {
       title: 'Авто, мото, танки',
+      hid: 4,
       children: [
-        'Шоссейные автомодели (в сборе)',
-        'Автомодели off-road и монстры (в сборе)',
-        'Танки',
-        'Другие',
+        {
+          title: 'Шоссейные автомодели (в сборе)',
+          hid: 22
+        },
+        {
+          title: 'Автомодели off-road и монстры (в сборе)',
+          hid: 23
+        },
+        {
+          title: 'Танки',
+          hid: 24
+        },
+        {
+          title: 'Другие',
+          hid: 25
+        },
         {
           title: 'Комплектующие для авто',
+          hid: 26,
           children: [
-            'Кузова',
-            'Колеса',
-            'Шасси',
-            'Тюнинг',
-            'Другое'
+            {
+              title: 'Кузова',
+              hid: 41
+            },
+            {
+              title: 'Колеса',
+              hid: 42
+            },
+            {
+              title: 'Шасси',
+              hid: 43
+            },
+            {
+              title: 'Тюнинг',
+              hid: 44
+            },
+            {
+              title: 'Другое',
+              hid: 45
+            }
           ]
         }
       ],
@@ -62,9 +124,16 @@ exports.up = async function (N) {
     },
     {
       title: 'Судомодели',
+      hid: 5,
       children: [
-        'Судомодели в сборе',
-        'Комплектующие для судомоделей'
+        {
+          title: 'Судомодели в сборе',
+          hid: 27
+        },
+        {
+          title: 'Комплектующие для судомоделей',
+          hid: 28
+        }
       ],
       links: [
         'Комплектующие'
@@ -72,53 +141,125 @@ exports.up = async function (N) {
     },
     {
       title: 'Другие модели',
+      hid: 6,
       children: [
-        'Ракеты',
-        'Железные дороги',
-        'Игрушки',
-        'Остальное'
+        {
+          title: 'Ракеты',
+          hid: 29
+        },
+        {
+          title: 'Железные дороги',
+          hid: 30
+        },
+        {
+          title: 'Игрушки',
+          hid: 31
+        },
+        {
+          title: 'Остальное',
+          hid: 32
+        }
       ]
     },
     {
       title: 'Аппаратура радиоуправления',
+      hid: 7,
       children: [
-        'Передатчики и комплекты',
-        'Приемники',
-        'Рулевые машинки',
-        'Остальное'
+        {
+          title: 'Передатчики и комплекты',
+          hid: 33
+        },
+        {
+          title: 'Приемники',
+          hid: 34
+        },
+        {
+          title: 'Рулевые машинки',
+          hid: 35
+        },
+        {
+          title: 'Остальное',
+          hid: 36
+        }
       ]
     },
     {
       title: 'Комплектующие',
+      hid: 8,
       children: [
         {
           title: 'FPV-оборудование',
+          hid: 37,
           children: [
-            'Камеры, подвесы',
-            'Видео-очки, шлемы',
-            'Видео-линки и компоненты',
-            'Остальное'
+            {
+              title: 'Камеры, подвесы',
+              hid: 46
+            },
+            {
+              title: 'Видео-очки, шлемы',
+              hid: 47
+            },
+            {
+              title: 'Видео-линки и компоненты',
+              hid: 48
+            },
+            {
+              title: 'Остальное',
+              hid: 49
+            }
           ]
         },
-        'Аккумуляторы',
-        'Зарядные устройства и блоки питания',
+        {
+          title: 'Аккумуляторы',
+          hid: 38
+        },
+        {
+          title: 'Зарядные устройства и блоки питания',
+          hid: 39
+        },
         {
           title: 'Двигатели и аксессуары',
+          hid: 40,
           children: [
-            'Бесколлекторные двигатели и регуляторы',
-            'Коллекторные двигатели и регуляторы',
-            'Калильные двигатели, топливо и аксессуары',
-            'Бензиновые двигатели  и аксессуары',
-            'Турбины и аксессуары',
-            'Остальное'
+            {
+              title: 'Бесколлекторные двигатели и регуляторы',
+              hid: 50
+            },
+            {
+              title: 'Коллекторные двигатели и регуляторы',
+              hid: 51
+            },
+            {
+              title: 'Калильные двигатели, топливо и аксессуары',
+              hid: 52
+            },
+            {
+              title: 'Бензиновые двигатели  и аксессуары',
+              hid: 53
+            },
+            {
+              title: 'Турбины и аксессуары',
+              hid: 54
+            },
+            {
+              title: 'Остальное',
+              hid: 55
+            }
           ]
         }
       ]
     },
-    'Инструмент, станки',
-    'Не модельное',
+    {
+      title: 'Инструмент, станки',
+      hid: 9
+    },
+    {
+      title: 'Не модельное',
+      hid: 10
+    },
     {
       title: 'Отдам в хорошие руки',
+      hid: 11,
       allow_wishes: false
     }
   ];
@@ -132,10 +273,12 @@ exports.up = async function (N) {
     let display_order = 0;
 
     for (let section_desc of section_array) {
-      if (typeof section_desc === 'string') section_desc = { title: section_desc };
+      if (!section_desc.title) throw new Error('title is required: ' + JSON.stringify(section_desc));
+      if (!section_desc.hid)   throw new Error('hid is required: ' + JSON.stringify(section_desc));
 
       let section = new N.models.market.Section({
         title:         section_desc.title,
+        hid:           section_desc.hid,
         display_order: ++display_order,
         is_category:   !!section_desc.children
       });
@@ -168,5 +311,16 @@ exports.up = async function (N) {
     });
   }
 
-  for (let section of sections_to_save) await section.save();
+  for (let section of sections_to_save) {
+    if (await N.models.market.Section.findOne({ hid: section.hid })) {
+      throw new Error(`Unable to save section '${section.title}': hid ${section.hid} already exists`);
+    }
+    await section.save();
+  }
+
+  await N.models.core.Increment.updateOne(
+    { key: 'market_section' },
+    { $set: { value: Math.max(0, ...sections_to_save.map(s => s.hid)) } },
+    { upsert: true }
+  );
 };
