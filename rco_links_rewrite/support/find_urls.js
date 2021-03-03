@@ -40,7 +40,6 @@ mongoose.Promise = Promise;
 
 async function search() {
   const mongoose_options = {
-    promiseLibrary: require('bluebird'),
     poolSize: 10,
     connectTimeoutMS: 30000,
     keepAlive: 1,
