@@ -12,7 +12,6 @@ modules:
   - rco_account_purge
   - rco_ads
   - rco_announces
-  - rco_contacts
   - rco_cookie_confirm
   - rco_db_setup
   - rco_design

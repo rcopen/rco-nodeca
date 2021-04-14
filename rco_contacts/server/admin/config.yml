@@ -1,5 +1,0 @@
-recursive: true
-public: false
-type:
-  widget_i18n: i18n/*.yml
-  widget_view: "*.pug"
