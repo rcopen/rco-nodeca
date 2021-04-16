@@ -21,5 +21,6 @@ modules:
   - rco_links_rewrite
   - rco_links_unshort
   - rco_permissions_workflow
+  - rco_restrict_images
   - rco_rules
   - rco_search

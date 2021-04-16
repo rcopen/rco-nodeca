@@ -1,0 +1,9 @@
+i18n:
+  ru-RU:
+    users:
+      rco_restrict_images:
+        err_fbcdn_link_forbidden:
+          Ссылки с доменов *.fbcdn.net запрещены, т.к. они временные и скоро сломаются.
+
+        err_fbcdn_image_forbidden:
+          Картинки с доменов *.fbcdn.net запрещены, т.к. они временные и скоро сломаются.

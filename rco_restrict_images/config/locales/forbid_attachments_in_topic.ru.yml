@@ -1,0 +1,6 @@
+i18n:
+  ru-RU:
+    users:
+      rco_restrict_images:
+        err_attachments_forbidden:
+          В этой теме нельзя вставлять картинки из альбомов (используйте внешние картинки).
