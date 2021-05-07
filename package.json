@@ -8,10 +8,10 @@
   "license": "MIT",
   "repository": "rcopen/rco-nodeca",
   "dependencies": {
-    "google-libphonenumber": "^3.2.2"
+    "google-libphonenumber": "^3.2.20"
   },
   "config": {
-    "unsafe-perm":true
+    "unsafe-perm": true
   },
   "scripts": {
     "install": "node rco_search/support/install"
