@@ -9,7 +9,7 @@ N.wire.once('navigate.done', function cookie_confirm() {
   $('body').append(N.runtime.render(module.apiPath));
 
   N.wire.on(module.apiPath + ':accept', function cookie_confirm_accept() {
-    var pairs = [];
+    let pairs = [];
 
     pairs.push('cookie_accepted=1');
     pairs.push('path=/');

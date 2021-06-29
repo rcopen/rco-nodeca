@@ -237,7 +237,7 @@ module.exports = function (N, apiPath) {
     for (let user of users) {
       let first_name = user.first_name;
       let last_name  = user.last_name;
-      let birthday   = user.about ? user.about.birthday : null;
+      let birthday   = user.about?.birthday;
       let location   = user.location;
       let valid      = true;
 
