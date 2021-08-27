@@ -23,14 +23,7 @@ module.exports = function (N, apiPath) {
     }
 
     env.res.about = env.res.about.filter(field => {
-      if (field.name === 'birthday') {
-        // hide birthday field if set
-        if (field.value) return false;
-
-        field.mandatory = true;
-
-        return true;
-      } else if (field.name === 'location') {
+      if (field.name === 'location') {
 
         field.mandatory = true;
 

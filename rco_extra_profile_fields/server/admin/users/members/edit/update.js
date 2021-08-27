@@ -24,18 +24,17 @@ module.exports = function (N, apiPath) {
       env.data.user.last_name = env.params.last_name;
     }
 
-    // If name or birthday are set to '', reset `incomplete_profile` flag
+    // If name is set to '', reset `incomplete_profile` flag
     //
     let complete = true;
 
-    if (!env.params.birthday) complete = false;
     if (!env.params.first_name && !env.params.last_name) complete = false;
 
     env.data.user.incomplete_profile = !complete;
   });
 
 
-  // If first_name, last_name or birthday are edited, and user is in che group,
+  // If first_name or last_name are edited, and user is in che group,
   // remove that group.
   //
   N.wire.before(apiPath, { priority: -5 }, async function remove_che_group(env) {
@@ -43,8 +42,7 @@ module.exports = function (N, apiPath) {
     if (env.data.user.isModified('usergroups')) return;
 
     if (!env.data.user.isModified('first_name') &&
-        !env.data.user.isModified('last_name') &&
-        !env.data.user.isModified('about.birthday')) return;
+        !env.data.user.isModified('last_name')) return;
 
     let grp_che = await N.models.users.UserGroup.findIdByName('che');
 

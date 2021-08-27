@@ -29,7 +29,7 @@ module.exports = function (N) {
       first_name_lc: String,
       last_name_lc:  String,
 
-      // flag whether or not user filled out his name and birthday;
+      // flag whether or not user filled out his name;
       // used to determine which group frozen user can be moved to
       incomplete_profile: { type: Boolean, default: true }
     });

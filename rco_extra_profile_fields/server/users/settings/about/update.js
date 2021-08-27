@@ -37,29 +37,6 @@ module.exports = function (N, apiPath) {
         }
       }
     }
-
-    // make sure birthday cannot be changed once set
-    if (env.data.user.about.birthday) {
-      if (typeof env.params.birthday !== 'undefined') {
-        env.params.birthday = env.data.user.about.birthday.toISOString().slice(0, 10);
-      }
-    }
-
-    // check that age is between 8 and 90 (this is more strong restriction
-    // in addition to checks in nodeca.users)
-    if (!env.data.user.about.birthday && env.params.birthday) {
-      let birthday = new Date(env.params.birthday);
-
-      if (!isNaN(birthday)) {
-        let now = new Date();
-        let age = now.getFullYear() - birthday.getFullYear();
-
-        if (now.getMonth() < birthday.getMonth()) age--;
-        if (now.getMonth() === birthday.getMonth() && now.getDate() < birthday.getDate()) age--;
-
-        if (age < 8 || age > 90) env.data.errors.birthday = true;
-      }
-    }
   });
 
 
@@ -71,10 +48,6 @@ module.exports = function (N, apiPath) {
 
     env.res.fields.first_name = { value: env.data.user.first_name, readonly: is_name_set };
     env.res.fields.last_name  = { value: env.data.user.last_name, readonly: is_name_set };
-
-    if (env.res.fields.birthday) {
-      env.res.fields.birthday.readonly = !!env.res.fields.birthday.value;
-    }
   });
 
 

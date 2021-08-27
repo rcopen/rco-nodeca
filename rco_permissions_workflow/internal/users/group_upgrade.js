@@ -19,8 +19,8 @@
 //
 //  2. `incomplete_profile`, `vb_imported` -> `just_registered` (fill profile)
 //
-//     If user has "about me" data filled (first name, last name,
-//     birthday and location), they are moved to `just_registered`
+//     If user has "about me" data filled (first name, last name
+//     and location), they are moved to `just_registered`
 //
 //  3. `incomplete_profile`, `vb_imported` -> `che` (fill profile)
 //
@@ -225,7 +225,6 @@ module.exports = function (N, apiPath) {
                     .where('first_name').exists()
                     .where('last_name').exists()
                     .where('location').exists()
-                    .where('about.birthday').exists()
                     .where('incomplete_profile').equals(true);
 
     if (locals.user_id) query = query.where('_id').equals(locals.user_id);
@@ -237,11 +236,10 @@ module.exports = function (N, apiPath) {
     for (let user of users) {
       let first_name = user.first_name;
       let last_name  = user.last_name;
-      let birthday   = user.about?.birthday;
       let location   = user.location;
       let valid      = true;
 
-      if (!first_name || !last_name || !birthday || !location) return;
+      if (!first_name || !last_name || !location) return;
 
       // Check if first and last names are the same
       if (first_name === last_name) valid = false;
