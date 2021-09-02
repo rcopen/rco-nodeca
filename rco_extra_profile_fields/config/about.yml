@@ -1,24 +1,24 @@
 users:
   about:
-    skype:
-      priority: 110
-      index: sparse
-      # regexp is similar to validation code used here:
-      # https://www.skype.com/en/developer/create-contactme-buttons/
-      validate_re: '^[a-zA-Z][a-zA-Z0-9_,.:-]{4,150}$'
+    #skype:
+    #  priority: 110
+    #  index: sparse
+    #  # regexp is similar to validation code used here:
+    #  # https://www.skype.com/en/developer/create-contactme-buttons/
+    #  validate_re: '^[a-zA-Z][a-zA-Z0-9_,.:-]{4,150}$'
 
-    whatsapp:
-      priority: 120
-      index: sparse
-      # validate it using google-libphonenumber library
-      validate: 'internal:users.validate_phone'
+    #whatsapp:
+    #  priority: 120
+    #  index: sparse
+    #  # validate it using google-libphonenumber library
+    #  validate: 'internal:users.validate_phone'
 
-    telegram:
-      priority: 130
-      index: sparse
-      # regexp is based on requirements from:
-      # http://telegram.wiki/tips:usernames
-      validate_re: '^[a-zA-Z][a-zA-Z0-9_]{4,150}$'
+    #telegram:
+    #  priority: 130
+    #  index: sparse
+    #  # regexp is based on requirements from:
+    #  # http://telegram.wiki/tips:usernames
+    #  validate_re: '^[a-zA-Z][a-zA-Z0-9_]{4,150}$'
 
     #jabber:
     #  priority: 140
