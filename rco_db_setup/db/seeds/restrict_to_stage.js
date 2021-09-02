@@ -22,9 +22,9 @@ module.exports = async function (N) {
 
   // Turn off registration confirmation
   //
-  let globalStore = N.settings.getStore('global');
+  /*let globalStore = N.settings.getStore('global');
 
   if (!globalStore) throw new Error('Settings store `global` is not registered.');
 
-  await globalStore.set({ validate_email: { value: false } });
+  await globalStore.set({ validate_email: { value: false } });*/
 };
