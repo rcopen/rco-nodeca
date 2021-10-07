@@ -60,7 +60,7 @@ module.exports = function (N) {
       // skip, if nothing changed
       if (this.isModified('nick') || this.isModified('first_name') || this.isModified('last_name')) {
         if (!!this.first_name && !!this.last_name) {
-          this.name = this.first_name + ' (' + this.nick + ') ' + this.last_name;
+          this.name = `${this.nick} (${this.first_name} ${this.last_name})`;
         } else {
           this.name = this.nick;
         }
