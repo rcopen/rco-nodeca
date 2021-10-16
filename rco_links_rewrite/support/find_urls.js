@@ -8,7 +8,7 @@ const _        = require('lodash');
 const argparse = require('argparse');
 const mongoose = require('mongoose');
 const stream   = require('stream');
-const pipeline = require('util').promisify(stream.pipeline);
+const { pipeline } = require('stream/promises');
 const URL      = require('url');
 
 
