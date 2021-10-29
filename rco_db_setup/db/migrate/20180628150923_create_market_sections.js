@@ -260,7 +260,8 @@ exports.up = async function (N) {
     {
       title: 'Отдам в хорошие руки',
       hid: 11,
-      allow_wishes: false
+      allow_wishes: false,
+      no_price: true
     }
   ];
 
@@ -286,6 +287,7 @@ exports.up = async function (N) {
       if (parent) section.parent = parent._id;
       if ('allow_offers' in section_desc) section.allow_offers = section_desc.allow_offers;
       if ('allow_wishes' in section_desc) section.allow_wishes = section_desc.allow_wishes;
+      if ('no_price' in section_desc) section.no_price = section_desc.no_price;
 
       if (!sections_by_name[section_desc.title]) {
         sections_by_name[section_desc.title] = section;
