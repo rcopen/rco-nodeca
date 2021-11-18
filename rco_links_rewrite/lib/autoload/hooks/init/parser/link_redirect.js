@@ -27,8 +27,8 @@ module.exports = function (N) {
         // only use redirector for specified domains
         if (!host || !domains.replace_check(N, host)) return N.io.BAD_REQUEST;
 
-        if (!$this.data('nd-orig')) {
-          $this.data('nd-orig', url);
+        if (!$this.data('nd-link-orig')) {
+          $this.data('nd-link-orig', url);
         }
 
         $(this).attr('href', N.router.linkTo('common.redirect', {
