@@ -8,7 +8,7 @@ N.wire.once('navigate.done', function show_dev_warning() {
   if (String(document.cookie).indexOf('dev_warning_off=1') !== -1) return;
 
   // Show warning only for localhost and domains with "dev." inside
-  if (!/^dev[.]|[.]dev[.]||^localhost/.test(window.location.hostname)) return;
+  if (!/^dev[.]|[.]dev[.]|^localhost/.test(window.location.hostname)) return;
 
   $('body').prepend($(N.runtime.render(module.apiPath)));
   $('html').addClass('dev-warning-on');
