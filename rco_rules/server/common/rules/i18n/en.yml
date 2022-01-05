@@ -29,7 +29,7 @@ en-US:
     правилами с целью выявления изменений в соглашении.
 
 
-    ## Общая информация <a name="intro" href="#intro" class="rules-anchor icon icon-link"></a>
+    ## Общая информация <a id="intro" href="#intro" class="rules-anchor icon icon-link"></a>
 
     Сайт RC Open создан для общения людей, увлеченных моделизмом. Это
     частный некоммерческий проект, что подразумевает отсутствие
@@ -77,7 +77,7 @@ en-US:
     все требования, не зависимо от того, в какой части они указаны.
 
 
-    ## Регистрация на форуме <a name="reg" href="#reg" class="rules-anchor icon icon-link"></a>
+    ## Регистрация на форуме <a id="reg" href="#reg" class="rules-anchor icon icon-link"></a>
 
     1. Чтобы публиковать сообщения на сайте, вам надо пройти регистрацию. Вы можете
        создать только один аккаунт, и введенные вами регистрационные данные
@@ -104,7 +104,7 @@ en-US:
        объявления барахолке и темы в некоторых разделах --- через 30 дней.
 
 
-    ## Поведение на форуме <a name="behaviour" href="#behaviour" class="rules-anchor icon icon-link"></a>
+    ## Поведение на форуме <a id="behaviour" href="#behaviour" class="rules-anchor icon icon-link"></a>
 
     1. На сайте допускается только вежливое и уважительное общение. Мат,
        хамство, токсичное поведение и прочие [набросы](http://lurkmore.to/%D0%9D%D0%B0%D0%B1%D1%80%D0%BE%D1%81)
@@ -141,7 +141,7 @@ en-US:
        помимо правил. Однако эта возможность используется исключительно редко.
 
 
-    ## Общие требования к сообщениям <a name="common" href="#common" class="rules-anchor icon icon-link"></a>
+    ## Общие требования к сообщениям <a id="common" href="#common" class="rules-anchor icon icon-link"></a>
 
     1. Заголовок темы должен четко отражать содержание сообщения. Темы с
        бессодержательными заголовками вида: "SOS!" или "Срочно нужна помощь!"
@@ -191,7 +191,7 @@ en-US:
         требованиями к общению. Обычно такие требования носят характер уточнений.
 
 
-    ## Специальные требования к "Барахолке" <a name="market" href="#market" class="rules-anchor icon icon-link"></a>
+    ## Специальные требования к "Барахолке" <a id="market" href="#market" class="rules-anchor icon icon-link"></a>
 
     1. При размещении объявления в "Барахолке" обязательно указание цены.
        Если вы не уверены, установите с разумным запасом приблизительную
@@ -230,7 +230,7 @@ en-US:
         злоупотреблять этим не рекомендуется.
 
 
-    ## Что запрещено <a name="prohibited" href="#prohibited" class="rules-anchor icon icon-link"></a>
+    ## Что запрещено <a id="prohibited" href="#prohibited" class="rules-anchor icon icon-link"></a>
 
     Здесь никто не обещает решить все ваши проблемы и именно так, как вам это
     хочется. Помните, что бесплатность проекта подразумевает наличие
@@ -319,7 +319,7 @@ en-US:
     разъяснениями или за расценками.
 
 
-    ## Дневники и Клубы <a name="blogs" href="#blogs" class="rules-anchor icon icon-link"></a>
+    ## Дневники и Клубы <a id="blogs" href="#blogs" class="rules-anchor icon icon-link"></a>
 
     Т.к. сайт специализированный, а блогозаписи попадают в общую ленту, то
     в блогах нужно придерживаться модельной тематики. Устраивать там жежешечку
@@ -354,7 +354,7 @@ en-US:
     продажи есть барахолка.
 
 
-    ## Предупреждения и блокировки <a name="infractions" href="#infractions" class="rules-anchor icon icon-link"></a>
+    ## Предупреждения и блокировки <a id="infractions" href="#infractions" class="rules-anchor icon icon-link"></a>
 
     1. Обсуждение действий модераторов проводится исключительно в приватной
        форме, и в первую очередь, непосредственно с модератором, вынесшим
@@ -399,7 +399,7 @@ en-US:
     серьезных --- ни одного.
 
 
-    ## Обратная связь <a name="feedback" href="#feedback" class="rules-anchor icon icon-link"></a>
+    ## Обратная связь <a id="feedback" href="#feedback" class="rules-anchor icon icon-link"></a>
 
     Особо обращаем внимание, что в функции Администрации и Модераторов не
     входит консультирование по моделизму. Для подобных вопросов следует
@@ -444,7 +444,7 @@ en-US:
       Устраивает она вас или нет --- это ваше дело.
 
 
-    ## Персональные данные пользователей и cookies <a name="userdata" href="#userdata" class="rules-anchor icon icon-link"></a>
+    ## Персональные данные пользователей и cookies <a id="userdata" href="#userdata" class="rules-anchor icon icon-link"></a>
 
     1. Какие персональные данные используются на сайте: фамилия, имя и
        местоположение, указанные пользователем.
@@ -467,7 +467,7 @@ en-US:
        целях.
 
 
-    ## Копирайты и использование материалов сайта <a name="copy" href="#copy" class="rules-anchor icon icon-link"></a>
+    ## Копирайты и использование материалов сайта <a id="copy" href="#copy" class="rules-anchor icon icon-link"></a>
 
     Размещая материалы на сайте, авторы соглашаются с тем, что через данный сайт
     всё опубликованное будет распространяться под лицензией [CC-BY](https://creativecommons.org/licenses/by/4.0/deed.ru)
@@ -494,7 +494,7 @@ en-US:
     информации.
 
 
-    ## Заключительные положения <a name="theend" href="#theend" class="rules-anchor icon icon-link"></a>
+    ## Заключительные положения <a id="theend" href="#theend" class="rules-anchor icon icon-link"></a>
 
     - Пользователям сайта следует понимать, что настоящие Правила представляют
       собой не просто правила поведения на сайте и описание функционала сайта,
