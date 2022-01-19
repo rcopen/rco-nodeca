@@ -41,8 +41,10 @@ module.exports = function (N, apiPath) {
     // don't change usergroups if they're already changed manually
     if (env.data.user.isModified('usergroups')) return;
 
-    if (!env.data.user.isModified('first_name') &&
-        !env.data.user.isModified('last_name')) return;
+    // Always run group upgrade even if nothing is changed.
+    // Old users may've been put in `che` group because of missing birthday when it was required.
+    //if (!env.data.user.isModified('first_name') &&
+    //    !env.data.user.isModified('last_name')) return;
 
     let grp_che = await N.models.users.UserGroup.findIdByName('che');
 
