@@ -45,7 +45,9 @@ module.exports = function (N) {
           for (let user of _.uniqBy(users, u => String(u._id))) {
             if (user.usergroups.some(group => important_usergroups[group])) continue;
 
-            await N.models.users.User.findById(user._id).remove();
+            // creating mongoose document is required to trigger 'remove' hooks
+            let doc = await N.models.users.User.findById(user._id).exec();
+            await doc.remove();
           }
 
         } catch (err) {
