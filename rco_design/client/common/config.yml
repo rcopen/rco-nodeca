@@ -9,4 +9,5 @@ type:
   widget_view: "*.pug"
   widget_js: "*.js"
   bin:
+    - "rco_layout/background.svg"
     - "rco_logo/logo.svg"

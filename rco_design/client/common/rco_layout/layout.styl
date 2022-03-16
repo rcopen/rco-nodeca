@@ -1,0 +1,56 @@
+@import "nodeca.core/client/common/_variables"
+
+$wide-screen-padding = 1.25rem
+
+body
+  background-color #f7f7f7
+  background-image url('$$ JSON.stringify(asset_url("rco-nodeca/rco_design/client/common/rco_layout/background.svg")) $$')
+  background-position top
+  background-size 450px
+  background-attachment fixed
+
+#content::before
+  content ''
+  box-shadow 0px 0 20px 8px #0001
+  position fixed
+  top 0
+  bottom 0
+  width 100%
+  max-width var(--page-max-width)
+  z-index -1000
+
+.dev-warning
+  width 100%
+  max-width var(--page-max-width)
+  align-self center
+
+.navbar
+  width 100%
+  max-width var(--page-max-width)
+  align-self center
+  left unset
+  right unset
+
+#content
+  width 100%
+  max-width var(--page-max-width)
+  align-self center
+  background-color white
+
+.page-footer
+  width 100%
+  max-width var(--page-max-width)
+  align-self center
+  background-color white
+
+@media (min-width: $page-max-width + unit($wide-screen-padding * 16, 'px'))
+  #content::before
+  #content
+  .dev-warning
+  .navbar
+  .page-footer
+    max-width 'calc(var(--page-max-width) + %s)' % $wide-screen-padding
+
+  .layout__container
+    padding-left $wide-screen-padding + $container-padding-x
+    padding-right $wide-screen-padding + $container-padding-x
