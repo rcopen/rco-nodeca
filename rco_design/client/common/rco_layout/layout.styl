@@ -1,6 +1,6 @@
 @import "nodeca.core/client/common/_variables"
 
-$wide-screen-padding = 1.25rem
+$wide-screen-padding = 2rem
 
 body
   background-color #f7f7f7
@@ -43,14 +43,15 @@ body
   align-self center
   background-color white
 
-@media (min-width: $page-max-width + unit($wide-screen-padding * 16, 'px'))
+@media (min-width: $page-max-width + unit($wide-screen-padding * 16, 'px') * 2)
   #content::before
   #content
   .dev-warning
   .navbar
   .page-footer
-    max-width 'calc(var(--page-max-width) + %s)' % $wide-screen-padding
+    max-width 'calc(var(--page-max-width) + %s)' % ($wide-screen-padding * 2)
 
   .layout__container
+    max-width 'calc(var(--page-max-width) + %s)' % ($wide-screen-padding * 2)
     padding-left $wide-screen-padding + $container-padding-x
     padding-right $wide-screen-padding + $container-padding-x
