@@ -6,6 +6,7 @@ i18n:
 
         category_names:
           profile: Profile
+          market: Market
 
         types:
           offtopic: Offtopic
@@ -15,6 +16,7 @@ i18n:
           frequent_bump: Bumping topic more than once a week
           spam: Topic looks like a spam
           duplicate_topic: Duplicate topic
+          duplicate_market_item: Duplicate market item
           warez: Pirated software
           bad_profile_image: Photo in the profile doesn't match requirements
           bad_profile_data: Bad information in the profile
@@ -60,6 +62,15 @@ i18n:
 
             - если вы повторно создали тему, вместо того, чтобы поднять старую
             - если вы создали одну и ту же тему в нескольких разделах
+
+            Перечитайте пожалуйста правила, которые вы обязались соблюдать при
+            регистрации. Такому выдающемуся и талантливому человеку как вы будет
+            совсем не трудно их соблюдать.
+          duplicate_market_item: |
+            Обычно это предупреждение выдается:
+
+            - если вы слишком быстро создали повторное объявление
+            - если вы создали одно и то же объявление в нескольких разделах
 
             Перечитайте пожалуйста правила, которые вы обязались соблюдать при
             регистрации. Такому выдающемуся и талантливому человеку как вы будет

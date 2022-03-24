@@ -50,6 +50,11 @@ users:
         expire_days: -1
         priority: 1040
         category_key: profile
+      duplicate_market_item:
+        points: 4
+        expire_days: 30
+        priority: 2000
+        category_key: market
 
     penalties:
       -
