@@ -40,15 +40,7 @@ mongoose.Promise = Promise;
 
 async function search() {
   const mongoose_options = {
-    poolSize: 10,
-    connectTimeoutMS: 30000,
-    keepAlive: 1,
-
-    // fix deprecation warnings appearing in mongodb driver,
-    // see https://mongoosejs.com/docs/deprecations.html for details
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useCreateIndex: true
+    connectTimeoutMS: 30000
   };
 
   await mongoose.connect('mongodb://localhost/' + args.db, mongoose_options);
