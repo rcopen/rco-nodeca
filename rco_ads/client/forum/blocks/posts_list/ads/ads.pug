@@ -2,12 +2,10 @@
   var postStatuses = '$$ JSON.stringify(N.models.forum.Post.statuses) $$';
   var rtb_id = '$$ JSON.stringify(N.config.ads.yandex_rtb_id) $$';
 
-//- same as `d % n`, but works with negative numbers correctly
-- function mod(d, n) { return (d % n + n) % n; }
-
 //- show ads to guests only
 if !self.runtime.is_member
-  if self.pagination && mod(self.post_counter, self.pagination.per_page) === 0
+  // show ad after the post user navigated to, don't show ads in prefetch pages
+  if self.current_post_hid && self.posts[self.post_idx].hid === self.current_post_hid
     - var visible = [ postStatuses.DELETED, postStatuses.DELETED_HARD, postStatuses.HB ].indexOf(self.posts[self.post_idx].st) === -1;
 
     //- visible post and deleted post right after it have the same post_counter
