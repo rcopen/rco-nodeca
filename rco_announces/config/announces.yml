@@ -10,3 +10,7 @@ announces:
     usergroup: che
   banned:
     usergroup: banned
+  market_novices:
+    usergroup: novices
+    api_path: [ market.index.buy, market.index.wish ]
+    hide_days: 7
